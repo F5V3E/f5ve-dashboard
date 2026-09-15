@@ -1,62 +1,7228 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>F5VE • My Space</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,viewport-fit=cover">
+<title>f5ve — my little world</title>
+
 <style>
-*{box-sizing:border-box}body{margin:0;font-family:Arial,sans-serif;color:#30233d;min-height:100vh;background:linear-gradient(135deg,#ffd5ec,#d9ccff 45%,#bcecff 75%,#d7fff8)}button,input,textarea{font:inherit}button{cursor:pointer;border:0}.hidden{display:none!important}.auth{min-height:100vh;display:grid;place-items:center;padding:24px}.card,.auth-card{background:#ffffff80;backdrop-filter:blur(20px);border:2px solid #fff;box-shadow:0 20px 60px #8c6ca633;border-radius:30px}.auth-card{width:min(430px,100%);padding:30px}.logo{text-align:center;font-size:44px;font-weight:1000;letter-spacing:-3px}.sub{text-align:center;opacity:.65;margin:5px 0 25px}.tabs{display:flex;gap:8px;margin-bottom:18px}.tab{flex:1;padding:12px;border-radius:17px;background:#fff8;font-weight:900}.tab.active{background:linear-gradient(135deg,#ff9ed8,#cbb8ff)}label{display:block;font-size:11px;font-weight:900;text-transform:uppercase;letter-spacing:1px}input,textarea{width:100%;margin:7px 0 15px;padding:14px;border-radius:17px;border:2px solid #fff;background:#fff9;outline:0;color:#30233d}textarea{min-height:130px;resize:vertical}.primary,.oauth,.pill,.save{padding:13px 16px;border-radius:17px;font-weight:900}.primary{width:100%;background:linear-gradient(135deg,#ff9ed8,#cbb8ff,#9edcff)}.oauth{width:100%;margin-top:10px;background:#fff9}.small{text-align:center;font-size:12px;opacity:.65;line-height:1.5;margin-top:13px}.app{display:none;min-height:100vh;padding-bottom:90px}header{position:sticky;top:0;z-index:5;padding:14px 20px;display:flex;justify-content:space-between;background:#ffffff66;backdrop-filter:blur(18px)}.brand{font-size:24px;font-weight:1000}.header-actions{display:flex;gap:7px}main{width:min(1050px,92%);margin:24px auto}.grid{display:grid;grid-template-columns:1.35fr .9fr;gap:18px}.card{padding:23px}.clock{text-align:center;padding:35px 15px}.time{font-size:clamp(55px,11vw,110px);font-weight:1000;letter-spacing:-7px}.date{font-weight:900;opacity:.65}.progress{height:11px;background:#fff8;border-radius:20px;overflow:hidden;margin-top:25px}.progress i{display:block;height:100%;width:0;background:linear-gradient(90deg,#ff9ed8,#cbb8ff,#a9fff1)}.profile{display:flex;gap:14px;align-items:center}.avatar{width:72px;height:72px;border-radius:23px;display:grid;place-items:center;background:linear-gradient(135deg,#ff9ed8,#cbb8ff);font-size:28px;font-weight:1000}.name{font-size:23px;font-weight:1000}.muted{opacity:.6}.nav{position:fixed;bottom:14px;left:50%;transform:translateX(-50%);z-index:10;display:flex;gap:5px;padding:7px;border-radius:23px;background:#fffc;backdrop-filter:blur(18px)}.nav button{padding:10px 12px;border-radius:15px;background:transparent;font-weight:900}.nav button.active{background:linear-gradient(135deg,#ffd0ee,#cbb8ff)}.view{display:none}.view.active{display:block}.photos{display:grid;grid-template-columns:repeat(3,1fr);gap:9px}.photos img{width:100%;aspect-ratio:1;object-fit:cover;border-radius:16px;border:3px solid white}.toast{position:fixed;right:18px;bottom:85px;background:#30233d;color:white;padding:13px 17px;border-radius:16px;display:none;z-index:20}@media(max-width:700px){.grid{grid-template-columns:1fr}.nav{width:95%;justify-content:center}.nav button{font-size:11px;padding:9px 7px}.photos{grid-template-columns:repeat(2,1fr)}}
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800;900&family=Space+Mono:wght@400;700&display=swap');
+
+:root{
+  --pink:#ff75bd;
+  --hot:#ff4fae;
+  --purple:#a884ff;
+  --blue:#83d9ff;
+  --cyan:#72f4ed;
+  --yellow:#fff29b;
+  --text:#38294b;
+  --muted:#78618b;
+  --glass:rgba(255,255,255,.56);
+  --border:rgba(255,255,255,.76);
+  --shadow:0 22px 55px rgba(108,55,130,.17);
+  --radius:29px;
+}
+
+*{
+  box-sizing:border-box;
+}
+
+html,body{
+  margin:0;
+  min-height:100%;
+  font-family:"DM Sans",sans-serif;
+  color:var(--text);
+}
+
+body{
+  overflow-x:hidden;
+  background:
+    radial-gradient(circle at 8% 5%,rgba(255,255,255,.95),transparent 22%),
+    radial-gradient(circle at 92% 8%,rgba(255,255,255,.7),transparent 18%),
+    linear-gradient(135deg,#ffc8e6 0%,#d9c7ff 44%,#a9e8ff 100%);
+}
+
+body:before{
+  content:"";
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  z-index:9999;
+  opacity:.13;
+  background-image:
+    radial-gradient(#fff 1px,transparent 1px),
+    radial-gradient(#59366d 1px,transparent 1px);
+  background-size:8px 8px,15px 15px;
+}
+
+button,input,textarea{
+  font:inherit;
+}
+
+button{
+  cursor:pointer;
+}
+
+.hidden{
+  display:none!important;
+}
+
+
+/* ============================================================
+   AUTH
+============================================================ */
+
+#authScreen{
+  min-height:100vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:20px;
+}
+
+.auth-card{
+  width:min(470px,100%);
+  padding:35px;
+  border-radius:38px;
+  background:rgba(255,255,255,.58);
+  border:1px solid #fff;
+  box-shadow:0 35px 100px rgba(85,43,110,.22);
+  backdrop-filter:blur(25px);
+  position:relative;
+  overflow:hidden;
+}
+
+.logo{
+  font-weight:900;
+  font-size:76px;
+  line-height:.8;
+  letter-spacing:-.1em;
+  color:#fff;
+  text-shadow:
+    0 3px 0 #e5c5ff,
+    0 10px 25px rgba(83,45,105,.22);
+}
+
+.kicker{
+  font-family:"Space Mono",monospace;
+  font-size:10px;
+  letter-spacing:.14em;
+  color:#795c8d;
+  margin-top:22px;
+  margin-bottom:8px;
+}
+
+.auth-card h1{
+  margin:0;
+  font-size:30px;
+  letter-spacing:-.05em;
+}
+
+.auth-card p{
+  color:var(--muted);
+  line-height:1.55;
+}
+
+.auth-input{
+  width:100%;
+  padding:14px 16px;
+  margin:6px 0;
+  border:1px solid rgba(255,255,255,.9);
+  background:rgba(255,255,255,.48);
+  border-radius:17px;
+  outline:none;
+  color:var(--text);
+}
+
+.auth-input:focus{
+  border-color:var(--pink);
+  box-shadow:0 0 0 4px rgba(255,117,189,.12);
+}
+
+.password-input{
+  letter-spacing:.08em;
+  font-family:"Space Mono",monospace;
+  font-weight:700;
+}
+
+.primary-btn{
+  border:0;
+  border-radius:16px;
+  padding:13px 18px;
+  color:#fff;
+  font-weight:800;
+  background:linear-gradient(135deg,var(--pink),var(--purple));
+  box-shadow:0 9px 23px rgba(177,81,174,.2);
+}
+
+.secondary-btn{
+  border:1px solid rgba(255,255,255,.85);
+  border-radius:15px;
+  padding:11px 15px;
+  background:rgba(255,255,255,.43);
+  color:var(--text);
+  font-weight:800;
+}
+
+.auth-actions{
+  display:flex;
+  gap:8px;
+  margin-top:8px;
+}
+
+.auth-note{
+  color:#80658e;
+  font-size:11px;
+  margin-top:13px;
+  line-height:1.5;
+}
+
+.auth-divider{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  margin:18px 0;
+  color:#876a94;
+  font-size:10px;
+  font-family:"Space Mono",monospace;
+}
+
+.auth-divider:before,
+.auth-divider:after{
+  content:"";
+  height:1px;
+  flex:1;
+  background:rgba(103,73,120,.16);
+}
+
+.google-btn{
+  width:100%;
+  border:1px solid rgba(255,255,255,.9);
+  border-radius:16px;
+  padding:13px 16px;
+  background:rgba(255,255,255,.67);
+  color:#3e304b;
+  font-weight:800;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  gap:9px;
+}
+
+.google-icon{
+  width:20px;
+  height:20px;
+  border-radius:50%;
+  display:grid;
+  place-items:center;
+  font-weight:900;
+  color:#4285f4;
+}
+
+.switch-auth{
+  text-align:center;
+  margin-top:18px;
+  color:#795d88;
+  font-size:11px;
+}
+
+.switch-auth button{
+  border:0;
+  background:none;
+  color:#df5bad;
+  font-weight:900;
+}
+
+
+/* ============================================================
+   APP
+============================================================ */
+
+#app{
+  display:none;
+  min-height:100vh;
+}
+
+.shell{
+  width:min(1230px,calc(100% - 24px));
+  margin:auto;
+  padding:18px 0 60px;
+}
+
+.topbar{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:12px;
+  margin-bottom:13px;
+}
+
+.mini-logo{
+  color:white;
+  font-size:30px;
+  font-weight:900;
+  letter-spacing:-.1em;
+  text-shadow:0 3px 10px rgba(72,39,91,.2);
+}
+
+.profile-pill{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  padding:5px 10px 5px 5px;
+  border-radius:30px;
+  background:rgba(255,255,255,.42);
+  border:1px solid rgba(255,255,255,.75);
+  backdrop-filter:blur(15px);
+}
+
+.profile-avatar{
+  width:33px;
+  height:33px;
+  border-radius:50%;
+  object-fit:cover;
+  background:linear-gradient(135deg,#ff8fcf,#9e8aff);
+  border:2px solid white;
+}
+
+.profile-name{
+  font-size:12px;
+  font-weight:800;
+}
+
+.top-actions{
+  display:flex;
+  align-items:center;
+  gap:7px;
+}
+
+.icon-btn{
+  width:41px;
+  height:41px;
+  border:1px solid rgba(255,255,255,.82);
+  border-radius:14px;
+  background:rgba(255,255,255,.44);
+  color:var(--text);
+}
+
+.nav{
+  display:flex;
+  gap:6px;
+  padding:6px;
+  margin-bottom:17px;
+  overflow-x:auto;
+  border:1px solid rgba(255,255,255,.7);
+  border-radius:21px;
+  background:rgba(255,255,255,.34);
+  backdrop-filter:blur(20px);
+}
+
+.nav button{
+  border:0;
+  padding:10px 14px;
+  border-radius:15px;
+  background:transparent;
+  color:#6f5780;
+  font-weight:800;
+  font-size:12px;
+  white-space:nowrap;
+}
+
+.nav button.active{
+  color:white;
+  background:linear-gradient(135deg,var(--pink),var(--purple));
+}
+
+.page{
+  display:none;
+}
+
+.page.active{
+  display:block;
+}
+
+.glass{
+  background:var(--glass);
+  border:1px solid var(--border);
+  border-radius:var(--radius);
+  box-shadow:var(--shadow);
+  backdrop-filter:blur(23px);
+  -webkit-backdrop-filter:blur(23px);
+}
+
+.card{
+  padding:22px;
+}
+
+
+/* ============================================================
+   HOME
+============================================================ */
+
+.home-grid{
+  display:grid;
+  grid-template-columns:1.5fr .85fr;
+  gap:17px;
+}
+
+.clock-card{
+  min-height:365px;
+  padding:31px;
+  display:flex;
+  flex-direction:column;
+  justify-content:space-between;
+  overflow:hidden;
+  position:relative;
+}
+
+.clock-card:after{
+  content:"";
+  width:300px;
+  height:300px;
+  border-radius:50%;
+  position:absolute;
+  right:-130px;
+  bottom:-150px;
+  background:rgba(255,255,255,.28);
+}
+
+.eyebrow{
+  font-family:"Space Mono",monospace;
+  color:#7c608c;
+  font-size:10px;
+  letter-spacing:.13em;
+}
+
+.greeting{
+  margin-top:8px;
+  font-size:clamp(29px,4vw,47px);
+  font-weight:900;
+  letter-spacing:-.06em;
+}
+
+.clock{
+  position:relative;
+  z-index:1;
+  font-family:"Space Mono",monospace;
+  font-size:clamp(43px,8vw,91px);
+  letter-spacing:-.09em;
+  line-height:.95;
+  background:linear-gradient(90deg,#ff51ad,#966eff,#54d3e7);
+  -webkit-background-clip:text;
+  background-clip:text;
+  color:transparent;
+}
+
+.date{
+  margin-top:9px;
+  color:#745a84;
+  font-weight:700;
+}
+
+.clock-controls{
+  display:flex;
+  gap:7px;
+  margin-top:15px;
+}
+
+.chip{
+  padding:8px 11px;
+  border-radius:13px;
+  border:1px solid rgba(255,255,255,.85);
+  background:rgba(255,255,255,.4);
+  color:#694f79;
+  font-size:10px;
+  font-weight:800;
+}
+
+.chip.on{
+  background:#fff;
+  color:#df5bad;
+}
+
+.side-stack{
+  display:grid;
+  gap:17px;
+}
+
+.profile-card{
+  min-height:170px;
+}
+
+.profile-big{
+  display:flex;
+  align-items:center;
+  gap:15px;
+}
+
+.big-avatar{
+  width:75px;
+  height:75px;
+  object-fit:cover;
+  border-radius:24px;
+  border:3px solid white;
+}
+
+.profile-big h2{
+  margin:0;
+  font-size:25px;
+}
+
+.profile-big p{
+  margin:4px 0;
+  color:var(--muted);
+  font-size:12px;
+}
+
+.progress-card{
+  min-height:178px;
+}
+
+.progress-track{
+  height:14px;
+  padding:3px;
+  margin-top:17px;
+  border-radius:99px;
+  background:rgba(255,255,255,.4);
+}
+
+.progress-fill{
+  width:0;
+  height:100%;
+  border-radius:99px;
+  background:linear-gradient(90deg,var(--pink),var(--purple),var(--blue));
+}
+
+.progress-text{
+  display:flex;
+  justify-content:space-between;
+  margin-top:10px;
+  color:#755982;
+  font-family:"Space Mono",monospace;
+  font-size:9px;
+}
+
+.collage-card{
+  padding:22px;
+  margin-top:17px;
+  overflow:hidden;
+}
+
+.collage-head{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+
+.collage-head h2{
+  margin:4px 0 0;
+  font-size:23px;
+  letter-spacing:-.05em;
+}
+
+.collage-head span{
+  font-size:11px;
+  color:#856690;
+}
+
+.collage-window{
+  height:270px;
+  overflow:hidden;
+  margin-top:14px;
+  border-radius:22px;
+  background:rgba(255,255,255,.23);
+}
+
+.collage-track{
+  width:max-content;
+  height:100%;
+  display:flex;
+  align-items:center;
+  gap:18px;
+  padding:20px 30px;
+  animation:slide 32s linear infinite;
+}
+
+@keyframes slide{
+  from{transform:translateX(0)}
+  to{transform:translateX(-50%)}
+}
+
+.polaroid{
+  width:172px;
+  height:220px;
+  padding:8px 8px 27px;
+  background:#fff;
+  flex:none;
+  box-shadow:0 15px 30px rgba(56,30,73,.17);
+  border-radius:5px;
+  transform:rotate(var(--rotate));
+  cursor:pointer;
+  transition:.2s;
+}
+
+.polaroid:hover{
+  transform:rotate(0) translateY(-8px) scale(1.04);
+}
+
+.polaroid img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}
+
+.photo-empty{
+  width:100%;
+  height:100%;
+  display:grid;
+  place-items:center;
+  text-align:center;
+  color:#81658f;
+  padding:35px;
+}
+
+.photo-empty strong{
+  display:block;
+  color:#654b76;
+  font-size:20px;
+  margin-bottom:5px;
+}
+
+.home-bottom{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:17px;
+  margin-top:17px;
+}
+
+.now-playing{
+  display:flex;
+  gap:14px;
+  align-items:center;
+}
+
+.album-art{
+  width:75px;
+  height:75px;
+  object-fit:cover;
+  border-radius:20px;
+}
+
+.song-title{
+  font-size:16px;
+  font-weight:900;
+}
+
+.song-artist{
+  margin-top:3px;
+  color:#7e628c;
+  font-size:11px;
+}
+
+.music-buttons{
+  display:flex;
+  gap:6px;
+  margin-top:10px;
+}
+
+.music-buttons button{
+  width:34px;
+  height:34px;
+  border:0;
+  border-radius:12px;
+  background:rgba(255,255,255,.52);
+}
+
+
+/* ============================================================
+   FRIENDS
+============================================================ */
+
+.friends-layout{
+  display:grid;
+  grid-template-columns:1fr .8fr;
+  gap:17px;
+}
+
+.friends-hero{
+  min-height:210px;
+  padding:27px;
+}
+
+.friends-hero h1{
+  margin:4px 0;
+  font-size:38px;
+  letter-spacing:-.07em;
+}
+
+.friends-hero p{
+  color:var(--muted);
+  max-width:580px;
+  line-height:1.55;
+}
+
+.friend-code{
+  margin-top:17px;
+  display:flex;
+  gap:7px;
+  align-items:center;
+  flex-wrap:wrap;
+}
+
+.friend-code-box{
+  padding:11px 14px;
+  border-radius:14px;
+  background:rgba(255,255,255,.55);
+  font-family:"Space Mono",monospace;
+  font-weight:700;
+  letter-spacing:.1em;
+}
+
+.friend-add{
+  display:flex;
+  gap:7px;
+}
+
+.friend-add input{
+  flex:1;
+  min-width:0;
+  border:1px solid rgba(255,255,255,.8);
+  border-radius:14px;
+  padding:11px;
+  background:rgba(255,255,255,.45);
+  outline:none;
+}
+
+.friend-list{
+  display:grid;
+  gap:8px;
+  margin-top:15px;
+}
+
+.friend-row{
+  display:flex;
+  align-items:center;
+  gap:11px;
+  padding:11px;
+  border-radius:17px;
+  background:rgba(255,255,255,.35);
+}
+
+.friend-row img{
+  width:49px;
+  height:49px;
+  border-radius:16px;
+  object-fit:cover;
+  border:2px solid white;
+}
+
+.friend-info{
+  flex:1;
+  min-width:0;
+}
+
+.friend-info strong{
+  display:block;
+  font-size:14px;
+}
+
+.friend-info span{
+  color:#85678f;
+  font-size:10px;
+}
+
+.friend-action{
+  border:0;
+  border-radius:11px;
+  padding:8px 10px;
+  background:rgba(255,255,255,.65);
+  color:#694e78;
+  font-weight:800;
+  font-size:10px;
+}
+
+.friend-card h2{
+  margin:0;
+}
+
+.online-dot{
+  display:inline-block;
+  width:7px;
+  height:7px;
+  border-radius:50%;
+  background:#72dfb0;
+  margin-right:4px;
+}
+
+
+/* ============================================================
+   MUSIC
+============================================================ */
+
+.music-layout{
+  display:grid;
+  grid-template-columns:300px 1fr;
+  gap:17px;
+}
+
+.music-cover{
+  width:100%;
+  aspect-ratio:1;
+  object-fit:cover;
+  border-radius:25px;
+}
+
+.upload-row{
+  display:flex;
+  gap:7px;
+  margin-top:12px;
+}
+
+.file-btn{
+  display:inline-flex;
+  justify-content:center;
+  align-items:center;
+  padding:10px 13px;
+  border:1px solid rgba(255,255,255,.8);
+  border-radius:14px;
+  background:rgba(255,255,255,.46);
+  font-size:11px;
+  font-weight:800;
+  cursor:pointer;
+}
+
+.file-btn input{
+  display:none;
+}
+
+.music-main h1{
+  margin:3px 0;
+  font-size:34px;
+  letter-spacing:-.06em;
+}
+
+.music-meta{
+  color:#795e89;
+  margin-bottom:19px;
+}
+
+input[type=range]{
+  width:100%;
+  accent-color:#ee69b5;
+}
+
+.time-row{
+  display:flex;
+  justify-content:space-between;
+  color:#84658f;
+  font:10px "Space Mono",monospace;
+}
+
+.player-row{
+  display:flex;
+  justify-content:center;
+  gap:9px;
+  margin:17px;
+}
+
+.player-row button{
+  width:44px;
+  height:44px;
+  border:0;
+  border-radius:50%;
+  background:rgba(255,255,255,.58);
+  font-weight:900;
+}
+
+.player-row .play{
+  width:58px;
+  height:58px;
+  color:#fff;
+  background:linear-gradient(135deg,var(--pink),var(--purple));
+}
+
+.visualizer{
+  height:62px;
+  display:flex;
+  justify-content:center;
+  align-items:end;
+  gap:4px;
+}
+
+.bar{
+  width:5px;
+  height:19px;
+  border-radius:10px;
+  background:linear-gradient(var(--pink),var(--purple));
+  animation:bars .8s ease-in-out infinite alternate;
+  animation-play-state:paused;
+}
+
+.visualizer.playing .bar{
+  animation-play-state:running;
+}
+
+.bar:nth-child(2){animation-delay:-.2s}
+.bar:nth-child(3){animation-delay:-.5s}
+.bar:nth-child(4){animation-delay:-.1s}
+.bar:nth-child(5){animation-delay:-.4s}
+.bar:nth-child(6){animation-delay:-.7s}
+.bar:nth-child(7){animation-delay:-.3s}
+
+@keyframes bars{
+  to{height:57px}
+}
+
+.playlist{
+  display:grid;
+  gap:6px;
+  max-height:290px;
+  overflow:auto;
+}
+
+.track{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  padding:9px;
+  border-radius:14px;
+}
+
+.track:hover,
+.track.active{
+  background:rgba(255,255,255,.48);
+}
+
+.track-art{
+  width:43px;
+  height:43px;
+  border-radius:11px;
+  object-fit:cover;
+}
+
+.track-info{
+  min-width:0;
+}
+
+.track-info strong{
+  display:block;
+  font-size:12px;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+
+.track-info span{
+  font-size:9px;
+  color:#83658e;
+}
+
+
+/* ============================================================
+   CALENDAR
+============================================================ */
+
+.calendar-layout{
+  display:grid;
+  grid-template-columns:1fr .8fr;
+  gap:17px;
+}
+
+.calendar-card{
+  padding:22px;
+}
+
+.calendar-top{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+}
+
+.calendar-top h1{
+  margin:0;
+  font-size:28px;
+  letter-spacing:-.06em;
+}
+
+.calendar-nav{
+  display:flex;
+  gap:5px;
+}
+
+.calendar-nav button{
+  width:34px;
+  height:34px;
+  border:0;
+  border-radius:11px;
+  background:rgba(255,255,255,.53);
+}
+
+.weekdays,
+.calendar-grid{
+  display:grid;
+  grid-template-columns:repeat(7,1fr);
+  gap:5px;
+}
+
+.weekdays{
+  margin-top:17px;
+}
+
+.weekdays div{
+  text-align:center;
+  font:9px "Space Mono",monospace;
+  color:#84658e;
+}
+
+.calendar-grid{
+  margin-top:7px;
+}
+
+.day{
+  min-height:49px;
+  border:0;
+  border-radius:12px;
+  background:rgba(255,255,255,.31);
+  color:#61496e;
+  font-weight:800;
+  position:relative;
+}
+
+.day.today{
+  color:white;
+  background:linear-gradient(135deg,var(--pink),var(--purple));
+}
+
+.day.has-note:after{
+  content:"♥";
+  position:absolute;
+  bottom:3px;
+  right:5px;
+  color:var(--pink);
+  font-size:9px;
+}
+
+.note-card textarea{
+  width:100%;
+  min-height:250px;
+  border:1px solid rgba(255,255,255,.8);
+  border-radius:17px;
+  background:rgba(255,255,255,.4);
+  padding:14px;
+  resize:vertical;
+  outline:none;
+  color:var(--text);
+}
+
+
+/* ============================================================
+   CAMERA
+============================================================ */
+
+.camera-layout{
+  display:grid;
+  grid-template-columns:1fr .75fr;
+  gap:17px;
+}
+
+.camera-card{
+  padding:22px;
+}
+
+.camera-stage{
+  width:min(100%,410px);
+  aspect-ratio:9/16;
+  margin:15px auto 0;
+  background:#33263c;
+  border:5px solid rgba(255,255,255,.7);
+  border-radius:28px;
+  overflow:hidden;
+  position:relative;
+}
+
+#cameraVideo{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}
+
+.camera-placeholder{
+  position:absolute;
+  inset:0;
+  display:grid;
+  place-items:center;
+  text-align:center;
+  color:#fff;
+  padding:30px;
+  background:linear-gradient(145deg,#72568d,#42344d);
+}
+
+.camera-controls{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  gap:12px;
+  margin-top:13px;
+}
+
+.camera-shutter{
+  width:66px;
+  height:66px;
+  border:6px solid rgba(255,255,255,.7);
+  border-radius:50%;
+  background:#fff;
+}
+
+.camera-small{
+  width:44px;
+  height:44px;
+  border:0;
+  border-radius:50%;
+  background:rgba(255,255,255,.62);
+}
+
+.camera-tip{
+  text-align:center;
+  margin-top:10px;
+  font-size:10px;
+  color:#81648e;
+}
+
+.saved-photos{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:9px;
+  max-height:590px;
+  overflow:auto;
+}
+
+.saved-photo{
+  position:relative;
+  aspect-ratio:9/13;
+  overflow:hidden;
+  border-radius:16px;
+  border:2px solid rgba(255,255,255,.7);
+}
+
+.saved-photo img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}
+
+.delete-photo{
+  position:absolute;
+  top:5px;
+  right:5px;
+  border:0;
+  width:26px;
+  height:26px;
+  border-radius:50%;
+  background:rgba(255,255,255,.8);
+}
+
+
+/* ============================================================
+   DIARY
+============================================================ */
+
+.diary-lock{
+  max-width:500px;
+  margin:50px auto;
+  padding:34px;
+  text-align:center;
+}
+
+.diary-lock h1{
+  margin:0;
+  font-size:39px;
+  letter-spacing:-.07em;
+}
+
+.diary-heart{
+  font-size:47px;
+}
+
+.diary-code{
+  display:flex;
+  justify-content:center;
+  gap:7px;
+  margin:19px 0 12px;
+}
+
+.diary-digit{
+  width:57px;
+  height:62px;
+  border:1px solid rgba(255,255,255,.8);
+  border-radius:16px;
+  background:rgba(255,255,255,.5);
+  text-align:center;
+  text-transform:uppercase;
+  font:700 23px "Space Mono",monospace;
+  outline:none;
+}
+
+.diary-page{
+  display:grid;
+  grid-template-columns:230px 1fr;
+  gap:17px;
+}
+
+.diary-sidebar,
+.diary-area{
+  padding:22px;
+}
+
+.diary-sidebar h2{
+  margin:4px 0;
+}
+
+.diary-sidebar p{
+  color:var(--muted);
+  font-size:12px;
+  line-height:1.5;
+}
+
+.diary-date{
+  margin-top:15px;
+  padding:11px;
+  border-radius:14px;
+  background:rgba(255,255,255,.4);
+  font:10px "Space Mono",monospace;
+}
+
+.diary-area textarea{
+  width:100%;
+  min-height:310px;
+  border:1px solid rgba(255,255,255,.8);
+  background:rgba(255,255,255,.4);
+  border-radius:18px;
+  padding:15px;
+  resize:vertical;
+  outline:none;
+  color:var(--text);
+}
+
+.diary-toolbar{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:10px;
+  margin-top:9px;
+}
+
+
+/* ============================================================
+   CUSTOMIZATION
+============================================================ */
+
+.custom-panel{
+  width:min(760px,100%);
+  padding:25px;
+}
+
+.custom-panel h1{
+  margin:3px 0;
+  font-size:32px;
+  letter-spacing:-.06em;
+}
+
+.custom-group{
+  padding:18px 0;
+  border-bottom:1px solid rgba(100,67,120,.12);
+}
+
+.custom-group h3{
+  margin:0 0 10px;
+}
+
+.custom-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:9px;
+}
+
+.custom-field label{
+  display:block;
+  margin-bottom:5px;
+  font:9px "Space Mono",monospace;
+  color:#80638d;
+}
+
+.custom-field input{
+  width:100%;
+  padding:10px;
+  border:1px solid rgba(255,255,255,.8);
+  border-radius:13px;
+  background:rgba(255,255,255,.4);
+  outline:none;
+  color:var(--text);
+}
+
+.color-input{
+  height:42px!important;
+  padding:3px!important;
+}
+
+.avatar-preview{
+  width:70px;
+  height:70px;
+  object-fit:cover;
+  border-radius:20px;
+  margin-bottom:8px;
+}
+
+.danger{
+  background:rgba(255,90,125,.12);
+  color:#ad4d70;
+}
+
+
+/* ============================================================
+   MODALS
+============================================================ */
+
+.modal{
+  position:fixed;
+  inset:0;
+  z-index:5000;
+  display:none;
+  align-items:center;
+  justify-content:center;
+  padding:20px;
+  background:rgba(45,29,56,.4);
+  backdrop-filter:blur(8px);
+}
+
+.modal.show{
+  display:flex;
+}
+
+.modal-card{
+  width:min(800px,100%);
+  max-height:90vh;
+  overflow:auto;
+  padding:20px;
+  border-radius:28px;
+  background:rgba(255,255,255,.78);
+  border:1px solid white;
+  box-shadow:0 30px 90px rgba(45,26,61,.3);
+}
+
+.modal-close{
+  float:right;
+  border:0;
+  width:34px;
+  height:34px;
+  border-radius:50%;
+  background:rgba(255,255,255,.7);
+}
+
+.modal-card > img{
+  display:block;
+  max-width:100%;
+  max-height:75vh;
+  margin:auto;
+  border-radius:17px;
+}
+
+.toast{
+  position:fixed;
+  z-index:9000;
+  left:50%;
+  bottom:20px;
+  transform:translate(-50%,20px);
+  opacity:0;
+  padding:11px 16px;
+  border-radius:15px;
+  background:rgba(49,35,59,.9);
+  color:white;
+  font-size:11px;
+  font-weight:800;
+  transition:.25s;
+  pointer-events:none;
+}
+
+.toast.show{
+  opacity:1;
+  transform:translate(-50%,0);
+}
+
+
+/* ============================================================
+   DECOR
+============================================================ */
+
+.sticker{
+  position:fixed;
+  z-index:2;
+  pointer-events:none;
+  color:white;
+  text-shadow:0 3px 12px rgba(76,39,96,.18);
+  animation:float 4s ease-in-out infinite;
+}
+
+.sticker.one{
+  top:17%;
+  left:2%;
+  font-size:27px;
+}
+
+.sticker.two{
+  top:46%;
+  right:2%;
+  font-size:25px;
+}
+
+.sticker.three{
+  bottom:10%;
+  left:3%;
+  font-size:23px;
+}
+
+@keyframes float{
+  50%{
+    transform:translateY(-8px)rotate(5deg);
+  }
+}
+
+
+/* ============================================================
+   RESPONSIVE
+============================================================ */
+
+@media(max-width:850px){
+
+  .home-grid,
+  .friends-layout,
+  .music-layout,
+  .calendar-layout,
+  .camera-layout,
+  .diary-page{
+    grid-template-columns:1fr;
+  }
+
+  .side-stack{
+    grid-template-columns:1fr 1fr;
+  }
+
+}
+
+@media(max-width:600px){
+
+  .shell{
+    width:calc(100% - 12px);
+    padding-top:9px;
+  }
+
+  .profile-name{
+    display:none;
+  }
+
+  .side-stack,
+  .home-bottom{
+    grid-template-columns:1fr;
+  }
+
+  .clock-card{
+    min-height:325px;
+    padding:23px;
+  }
+
+  .clock{
+    font-size:49px;
+  }
+
+  .collage-window{
+    height:235px;
+  }
+
+  .polaroid{
+    width:145px;
+    height:190px;
+  }
+
+  .custom-grid{
+    grid-template-columns:1fr;
+  }
+
+  .friend-add{
+    flex-direction:column;
+  }
+
+}
+
+
+/* ============================================================
+   CHATS + CAMERA + DIARY POLISH
+============================================================ */
+.chats-layout{display:grid;grid-template-columns:300px 1fr;gap:17px;min-height:590px}
+.chat-list-card,.chat-window-card{padding:18px}
+.chat-list-head{display:flex;justify-content:space-between;align-items:center;gap:8px}
+.chat-list{display:grid;gap:7px;margin-top:14px;max-height:510px;overflow:auto}
+.chat-person{width:100%;display:flex;align-items:center;gap:10px;padding:10px;border:1px solid transparent;border-radius:18px;background:rgba(255,255,255,.30);text-align:left;color:var(--text)}
+.chat-person.active{border-color:rgba(255,255,255,.9);background:rgba(255,255,255,.62);box-shadow:0 8px 20px rgba(100,55,130,.08)}
+.chat-person img{width:46px;height:46px;flex:none;border-radius:15px;object-fit:cover;border:2px solid white}
+.chat-person-info{min-width:0;flex:1}.chat-person-info strong{display:block;font-size:13px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.chat-person-info span{display:block;margin-top:3px;font-size:9px;color:#85678f;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.chat-window{height:100%;min-height:540px;display:flex;flex-direction:column}
+.chat-head{display:flex;align-items:center;gap:11px;padding-bottom:13px;border-bottom:1px solid rgba(100,67,120,.10)}
+.chat-head img{width:49px;height:49px;border-radius:16px;object-fit:cover;border:2px solid white}.chat-head-info{flex:1;min-width:0}.chat-head-info strong{display:block;font-size:15px}.chat-head-info span{font-size:9px;color:#80638e}
+.chat-messages{flex:1;overflow:auto;padding:18px 5px;display:flex;flex-direction:column;gap:8px}.chat-empty{margin:auto;text-align:center;color:#80638e;font-size:11px;padding:25px}
+.message{max-width:78%;padding:10px 13px;border-radius:18px;font-size:12px;line-height:1.4;word-break:break-word}.message.me{align-self:flex-end;color:white;border-bottom-right-radius:6px;background:linear-gradient(135deg,var(--pink),var(--purple))}.message.them{align-self:flex-start;border-bottom-left-radius:6px;background:rgba(255,255,255,.62)}
+.message-time{display:block;margin-top:4px;font-size:7px;opacity:.65;font-family:"Space Mono",monospace}
+.chat-compose{display:flex;gap:7px;padding-top:10px;border-top:1px solid rgba(100,67,120,.10)}.chat-compose input{flex:1;min-width:0;border:1px solid rgba(255,255,255,.85);border-radius:16px;padding:12px 14px;outline:none;background:rgba(255,255,255,.48);color:var(--text)}.chat-send{width:48px;border:0;border-radius:15px;color:white;font-weight:900;background:linear-gradient(135deg,var(--pink),var(--purple))}.chat-note{margin-top:8px;text-align:center;color:#80638e;font-size:8px}
+.diary-lock{position:relative;overflow:hidden}.diary-lock:before,.diary-lock:after{content:"♡";position:absolute;color:rgba(255,117,189,.18);font-size:90px;pointer-events:none}.diary-lock:before{top:-25px;left:-12px;transform:rotate(-18deg)}.diary-lock:after{right:-12px;bottom:-35px;transform:rotate(15deg)}
+.diary-heart{position:relative;z-index:1;width:82px;height:82px;margin:0 auto 10px;display:grid;place-items:center;border-radius:28px;color:white;font-size:48px;background:linear-gradient(135deg,var(--pink),var(--purple));box-shadow:0 15px 35px rgba(177,81,174,.22)}
+.camera-phone-input{display:none}.camera-phone-label{display:inline-flex;align-items:center;justify-content:center;gap:5px;padding:10px 13px;border-radius:14px;border:1px solid rgba(255,255,255,.8);background:rgba(255,255,255,.46);font-size:10px;font-weight:800;cursor:pointer;margin-top:8px}
+.camera-stage video{background:#33263c}
+@media(max-width:850px){.chats-layout{grid-template-columns:1fr}.chat-list{max-height:260px}.chat-window{min-height:500px}}
+
 </style>
 </head>
-<body>
-<section class="auth" id="auth"><div class="auth-card">
-<div class="logo">F5VE ✦</div><div class="sub">your tiny glossy corner of the internet ♡</div>
-<div class="tabs"><button class="tab active" id="signupTab">SIGN UP</button><button class="tab" id="loginTab">LOG IN</button></div>
-<form id="authForm"><label>Username / nickname</label><input id="username" maxlength="30" autocomplete="username" required placeholder="your cute name"><label>Password</label><input id="password" type="password" autocomplete="new-password" required placeholder="minimum 4 characters"><button class="primary" id="submitAuth">CREATE ACCOUNT ✦</button></form>
-<button class="oauth" id="googleBtn">G Continue with Google</button>
-<div class="small">Password = <b>4 characters minimum</b>, with no other restrictions.<br>This standalone version remembers this browser. Real Google login needs OAuth/backend setup.</div>
-</div></section>
 
-<section class="app" id="app">
-<header><div class="brand">F5VE ✦ MY SPACE</div><div class="header-actions"><button class="pill" id="sparkle">✦</button><button class="pill" id="logout">LOG OUT</button></div></header>
-<main>
-<section class="view active" id="home"><div class="grid">
-<div class="card clock"><div class="muted">TODAY IS YOUR DAY ♡</div><div class="time" id="time">00:00</div><div class="date" id="date"></div><div class="progress"><i id="dayProgress"></i></div><div class="muted" id="progressText"></div></div>
-<div class="card"><h2>♡ Profile</h2><div class="profile"><div class="avatar" id="avatar">♡</div><div><div class="name" id="profileName"></div><div class="muted">remembered on this device</div></div></div><hr><label>Quick note</label><textarea id="quickNote" placeholder="write something..."></textarea><button class="save" id="saveNote">SAVE NOTE</button></div>
-<div class="card"><h2>✦ Welcome</h2><p id="welcomeText">Make this space yours.</p></div>
-<div class="card"><h2>♪ Now Playing</h2><p class="muted">Your local music can be added here later.</p></div>
-</div></section>
-<section class="view" id="calendar"><div class="card"><h2>♡ Calendar</h2><label>Today's note</label><textarea id="calendarNote" placeholder="what's happening?"></textarea><button class="save" id="saveCalendar">SAVE</button></div></section>
-<section class="view" id="camera"><div class="card"><h2>📷 Camera</h2><p class="muted">Choose a photo. GitHub Pages also gives you HTTPS for camera features.</p><input type="file" accept="image/*" capture="environment" id="photoInput"><div class="photos" id="photos"></div></div></section>
-<section class="view" id="diary"><div class="card"><h2>♡ Diary</h2><label>Diary password</label><input type="password" id="diaryPassword" placeholder="4+ characters"><button class="save" id="unlockDiary">UNLOCK</button><div id="diaryArea" class="hidden"><textarea id="diaryText" placeholder="dear diary..."></textarea><button class="save" id="saveDiary">SAVE ENTRY</button></div></div></section>
-<section class="view" id="customize"><div class="card"><h2>✧ Customize</h2><label>Display name</label><input id="customName"><label>Greeting</label><input id="customGreeting"><button class="save" id="saveCustomize">SAVE CHANGES</button><hr><button class="save" id="forgetDevice">FORGET THIS DEVICE</button> <button class="save" id="deleteAccount">DELETE ACCOUNT</button></div></section>
+<body>
+
+<div class="sticker one">✦</div>
+<div class="sticker two">♡</div>
+<div class="sticker three">★</div>
+
+
+<!-- =========================================================
+AUTH SCREEN
+========================================================= -->
+
+<section id="authScreen">
+
+<div class="auth-card">
+
+  <div class="logo">f5ve</div>
+
+
+  <!-- =======================
+       SIGN UP
+  ======================== -->
+
+  <div id="signupView">
+
+    <div class="kicker">
+      WELCOME TO YOUR LITTLE WORLD
+    </div>
+
+    <h1>
+      create your account ♡
+    </h1>
+
+    <p>
+      Make your own profile, photos, music,
+      diary and little internet world.
+    </p>
+
+
+    <input
+      id="signupName"
+      class="auth-input"
+      maxlength="28"
+      placeholder="name / nickname"
+      autocomplete="name"
+    >
+
+
+    <input
+      id="signupPassword"
+      class="auth-input password-input"
+      type="password"
+      minlength="4"
+      maxlength="100"
+      placeholder="password — 4+ characters"
+      autocomplete="new-password"
+    >
+
+
+    <div class="auth-note">
+      Your password can contain literally anything:
+      letters, numbers, symbols, spaces, emojis, etc.
+      It only needs to be 4 characters or longer.
+    </div>
+
+
+    <button
+      class="primary-btn"
+      style="width:100%;margin-top:12px"
+      onclick="signUp()"
+    >
+      SIGN UP ✦
+    </button>
+
+
+    <div class="auth-divider">
+      OR
+    </div>
+
+
+    <button
+      class="google-btn"
+      onclick="googleLogin()"
+    >
+
+      <span class="google-icon">
+        G
+      </span>
+
+      Continue with Google
+
+    </button>
+
+
+    <div class="switch-auth">
+
+      Already have an account?
+
+      <button onclick="showLogin()">
+        Log in
+      </button>
+
+    </div>
+
+  </div>
+
+
+  <!-- =======================
+       LOGIN
+  ======================== -->
+
+  <div
+    id="loginView"
+    class="hidden"
+  >
+
+    <div class="kicker">
+      WELCOME BACK ♡
+    </div>
+
+    <h1>
+      log into your world
+    </h1>
+
+    <p>
+      We'll remember this device after you log in.
+    </p>
+
+
+    <input
+      id="loginName"
+      class="auth-input"
+      placeholder="name / nickname"
+      autocomplete="username"
+    >
+
+
+    <input
+      id="loginPassword"
+      class="auth-input password-input"
+      type="password"
+      minlength="4"
+      maxlength="100"
+      placeholder="password"
+      autocomplete="current-password"
+    >
+
+
+    <button
+      class="primary-btn"
+      style="width:100%;margin-top:5px"
+      onclick="login()"
+    >
+      LOG IN ♡
+    </button>
+
+
+    <div class="auth-divider">
+      OR
+    </div>
+
+
+    <button
+      class="google-btn"
+      onclick="googleLogin()"
+    >
+
+      <span class="google-icon">
+        G
+      </span>
+
+      Continue with Google
+
+    </button>
+
+
+    <div
+      id="loginError"
+      class="auth-note"
+    ></div>
+
+
+    <div class="switch-auth">
+
+      Don't have an account?
+
+      <button onclick="showSignup()">
+        Sign up
+      </button>
+
+    </div>
+
+  </div>
+
+</div>
+
+</section>
+
+
+<!-- =========================================================
+APP
+========================================================= -->
+
+<div id="app">
+
+<div class="shell">
+
+<header class="topbar">
+
+  <div class="mini-logo">
+    f5ve
+  </div>
+
+
+  <div class="top-actions">
+
+    <div class="profile-pill">
+
+      <img
+        id="topAvatar"
+        class="profile-avatar"
+      >
+
+      <span
+        id="topName"
+        class="profile-name"
+      >
+        me
+      </span>
+
+    </div>
+
+
+    <button
+      class="icon-btn"
+      title="Customize"
+      onclick="openCustomize()"
+    >
+      🖌
+    </button>
+
+
+    <button
+      class="icon-btn"
+      title="Sparkles"
+      onclick="sparkleBurst()"
+    >
+      ✦
+    </button>
+
+
+    <button
+      class="icon-btn"
+      title="Log out"
+      onclick="logoutProfile()"
+    >
+      ↪
+    </button>
+
+  </div>
+
+</header>
+
+
+<nav class="nav">
+
+  <button
+    class="active"
+    data-page="home"
+    onclick="showPage('home',this)"
+  >
+    HOME
+  </button>
+
+  <button
+    data-page="music"
+    onclick="showPage('music',this)"
+  >
+    MUSIC
+  </button>
+
+  <button
+    data-page="friends"
+    onclick="showPage('friends',this)"
+  >
+    FRIENDS
+  </button>
+
+  <button
+    data-page="chats"
+    onclick="showPage('chats',this)"
+  >
+    CHATS
+  </button>
+
+  <button
+    data-page="calendar"
+    onclick="showPage('calendar',this)"
+  >
+    CALENDAR
+  </button>
+
+  <button
+    data-page="camera"
+    onclick="showPage('camera',this)"
+  >
+    CAMERA
+  </button>
+
+  <button
+    data-page="diary"
+    onclick="showPage('diary',this)"
+  >
+    DIARY
+  </button>
+
+</nav>
+
+
+<!-- =========================================================
+HOME
+========================================================= -->
+
+<main
+  id="homePage"
+  class="page active"
+>
+
+<div class="home-grid">
+
+<section class="glass clock-card">
+
+  <div>
+
+    <div
+      class="eyebrow"
+      id="homeEyebrow"
+    >
+      ONLINE IN MY OWN LITTLE WORLD
+    </div>
+
+    <div
+      class="greeting"
+      id="greeting"
+    >
+      hi ♡
+    </div>
+
+  </div>
+
+
+  <div>
+
+    <div
+      class="clock"
+      id="clock"
+    >
+      00:00
+    </div>
+
+    <div
+      class="date"
+      id="date"
+    >
+      loading...
+    </div>
+
+
+    <div class="clock-controls">
+
+      <button
+        id="formatBtn"
+        class="chip on"
+        onclick="toggle24h()"
+      >
+        24H
+      </button>
+
+      <button
+        id="secondsBtn"
+        class="chip on"
+        onclick="toggleSeconds()"
+      >
+        SECONDS
+      </button>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<div class="side-stack">
+
+<section class="glass card profile-card">
+
+  <div class="section-title">
+    MY PROFILE
+  </div>
+
+  <div class="profile-big">
+
+    <img
+      id="homeAvatar"
+      class="big-avatar"
+    >
+
+    <div>
+
+      <h2 id="homeName">
+        me
+      </h2>
+
+      <p id="homeReminder">
+        make today cute.
+      </p>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<section class="glass card progress-card">
+
+  <div class="section-title">
+    TODAY
+  </div>
+
+  <div
+    style="
+      font-weight:900;
+      font-size:22px
+    "
+  >
+    day progress
+  </div>
+
+  <div class="progress-track">
+
+    <div
+      id="dayProgress"
+      class="progress-fill"
+    ></div>
+
+  </div>
+
+  <div class="progress-text">
+
+    <span>
+      00:00
+    </span>
+
+    <span id="progressPercent">
+      0%
+    </span>
+
+    <span>
+      23:59
+    </span>
+
+  </div>
+
+</section>
+
+</div>
+
+</div>
+
+
+<section class="glass collage-card">
+
+  <div class="collage-head">
+
+    <div>
+
+      <div class="section-title">
+        LITTLE CAMERA ROLL
+      </div>
+
+      <h2>
+        moments from my world ♡
+      </h2>
+
+    </div>
+
+    <span id="photoCount">
+      0 photos
+    </span>
+
+  </div>
+
+
+  <div class="collage-window">
+
+    <div
+      id="collageTrack"
+      class="collage-track"
+    >
+
+      <div class="photo-empty">
+
+        <div>
+
+          <strong>
+            your collage is empty ♡
+          </strong>
+
+          Take pictures in CAMERA
+          and they'll appear here.
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<div class="home-bottom">
+
+<section class="glass card">
+
+  <div class="section-title">
+    NOW PLAYING
+  </div>
+
+  <div class="now-playing">
+
+    <img
+      id="miniAlbum"
+      class="album-art"
+    >
+
+    <div>
+
+      <div
+        id="miniTitle"
+        class="song-title"
+      >
+        nothing playing
+      </div>
+
+      <div
+        id="miniArtist"
+        class="song-artist"
+      >
+        add some music ♡
+      </div>
+
+      <div class="music-buttons">
+
+        <button onclick="previousTrack()">
+          ‹
+        </button>
+
+        <button
+          id="miniPlay"
+          onclick="togglePlay()"
+        >
+          ▶
+        </button>
+
+        <button onclick="nextTrack()">
+          ›
+        </button>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<section class="glass card">
+
+  <div class="section-title">
+    FRIENDS
+  </div>
+
+  <div
+    id="homeFriendCount"
+    style="
+      font-size:22px;
+      font-weight:900
+    "
+  >
+    0 friends
+  </div>
+
+  <p
+    style="
+      color:#7d618b;
+      font-size:12px
+    "
+  >
+    Add people and build your tiny
+    internet circle ♡
+  </p>
+
+  <button
+    class="secondary-btn"
+    onclick="goFriends()"
+  >
+    OPEN FRIENDS
+  </button>
+
+</section>
+
+</div>
+
 </main>
-<nav class="nav"><button class="active" data-view="home">⌂ HOME</button><button data-view="calendar">♡ CAL</button><button data-view="camera">📷 CAM</button><button data-view="diary">📖 DIARY</button><button data-view="customize">✦ EDIT</button></nav>
-</section><div class="toast" id="toast"></div>
+
+
+<!-- =========================================================
+FRIENDS
+========================================================= -->
+
+<main
+  id="friendsPage"
+  class="page"
+>
+
+<div class="friends-layout">
+
+<section class="glass friends-hero">
+
+  <div class="section-title">
+    MY LITTLE CIRCLE
+  </div>
+
+  <h1>
+    friends ♡
+  </h1>
+
+  <p>
+    Add another profile using their friend code.
+    On this standalone version, profiles can connect
+    when they exist in the same browser/device.
+  </p>
+
+
+  <div class="friend-code">
+
+    <span>
+      MY CODE
+    </span>
+
+    <div
+      id="myFriendCode"
+      class="friend-code-box"
+    >
+      ------
+    </div>
+
+    <button
+      class="secondary-btn"
+      onclick="copyFriendCode()"
+    >
+      COPY
+    </button>
+
+  </div>
+
+</section>
+
+
+<section class="glass card">
+
+  <div class="section-title">
+    ADD SOMEONE
+  </div>
+
+  <h2 style="margin:3px 0 14px">
+    add friend
+  </h2>
+
+  <div class="friend-add">
+
+    <input
+      id="friendCodeInput"
+      placeholder="enter their friend code"
+      maxlength="12"
+    >
+
+    <button
+      class="primary-btn"
+      onclick="addFriend()"
+    >
+      ADD ♡
+    </button>
+
+  </div>
+
+  <div
+    style="
+      font-size:10px;
+      color:#81648d;
+      margin-top:10px
+    "
+  >
+    Friend codes are unique to each profile.
+  </div>
+
+</section>
+
+</div>
+
+
+<section
+  class="glass card friend-card"
+  style="margin-top:17px"
+>
+
+  <div class="section-title">
+    MY FRIENDS
+  </div>
+
+  <h2>
+    people in my world
+  </h2>
+
+  <div
+    id="friendList"
+    class="friend-list"
+  ></div>
+
+</section>
+
+</main>
+
+
+<!-- =========================================================
+CHATS
+========================================================= -->
+
+<main id="chatsPage" class="page">
+
+<div class="chats-layout">
+
+<section class="glass chat-list-card">
+  <div class="chat-list-head">
+    <div>
+      <div class="section-title">MESSAGES</div>
+      <h2 style="margin:4px 0">my chats ♡</h2>
+    </div>
+    <span id="chatCount" style="font-size:9px;color:#80638e">0</span>
+  </div>
+  <div id="chatList" class="chat-list"></div>
+</section>
+
+<section class="glass chat-window-card">
+  <div id="chatWindow" class="chat-window">
+    <div class="chat-head">
+      <img id="chatAvatar" src="" alt="">
+      <div class="chat-head-info">
+        <strong id="chatName">choose a friend</strong>
+        <span id="chatStatus">your little messages ♡</span>
+      </div>
+    </div>
+    <div id="chatMessages" class="chat-messages">
+      <div class="chat-empty">Pick someone from your friends list<br>to start chatting ♡</div>
+    </div>
+    <div class="chat-compose">
+      <input id="chatInput" maxlength="500" placeholder="type something cute..." onkeydown="if(event.key==='Enter')sendChat()">
+      <button class="chat-send" onclick="sendChat()">➤</button>
+    </div>
+    <div class="chat-note">chats are saved locally on this browser ♡</div>
+  </div>
+</section>
+
+</div>
+
+</main>
+
+
+<!-- =========================================================
+MUSIC
+========================================================= -->
+
+<main
+  id="musicPage"
+  class="page"
+>
+
+<div class="music-layout">
+
+<section class="glass card">
+
+  <img
+    id="musicCover"
+    class="music-cover"
+  >
+
+  <div class="upload-row">
+
+    <label class="file-btn">
+
+      + ADD MP3
+
+      <input
+        id="audioUpload"
+        type="file"
+        accept="audio/*"
+        multiple
+      >
+
+    </label>
+
+  </div>
+
+</section>
+
+
+<section class="glass card music-main">
+
+  <div class="section-title">
+    MY MUSIC
+  </div>
+
+  <h1 id="musicTitle">
+    nothing playing
+  </h1>
+
+  <div
+    id="musicArtist"
+    class="music-meta"
+  >
+    add an MP3 to start
+  </div>
+
+  <audio id="audio"></audio>
+
+
+  <input
+    id="seek"
+    type="range"
+    min="0"
+    max="100"
+    value="0"
+  >
+
+
+  <div class="time-row">
+
+    <span id="currentTime">
+      0:00
+    </span>
+
+    <span id="duration">
+      0:00
+    </span>
+
+  </div>
+
+
+  <div class="player-row">
+
+    <button onclick="previousTrack()">
+      ‹
+    </button>
+
+    <button
+      id="playButton"
+      class="play"
+      onclick="togglePlay()"
+    >
+      ▶
+    </button>
+
+    <button onclick="nextTrack()">
+      ›
+    </button>
+
+  </div>
+
+
+  <div
+    id="visualizer"
+    class="visualizer"
+  >
+
+    <i class="bar"></i>
+    <i class="bar"></i>
+    <i class="bar"></i>
+    <i class="bar"></i>
+    <i class="bar"></i>
+    <i class="bar"></i>
+    <i class="bar"></i>
+
+  </div>
+
+
+  <div
+    class="section-title"
+    style="margin-top:13px"
+  >
+    PLAYLIST
+  </div>
+
+  <div
+    id="playlist"
+    class="playlist"
+  ></div>
+
+</section>
+
+</div>
+
+</main>
+
+
+<!-- =========================================================
+CALENDAR
+========================================================= -->
+
+<main
+  id="calendarPage"
+  class="page"
+>
+
+<div class="calendar-layout">
+
+<section class="glass calendar-card">
+
+  <div class="calendar-top">
+
+    <h1 id="calendarTitle">
+      Month
+    </h1>
+
+    <div class="calendar-nav">
+
+      <button onclick="changeMonth(-1)">
+        ‹
+      </button>
+
+      <button onclick="goTodayNote()">
+        ●
+      </button>
+
+      <button onclick="changeMonth(1)">
+        ›
+      </button>
+
+    </div>
+
+  </div>
+
+
+  <div class="weekdays">
+
+    <div>MON</div>
+    <div>TUE</div>
+    <div>WED</div>
+    <div>THU</div>
+    <div>FRI</div>
+    <div>SAT</div>
+    <div>SUN</div>
+
+  </div>
+
+
+  <div
+    id="calendarGrid"
+    class="calendar-grid"
+  ></div>
+
+</section>
+
+
+<section class="glass card note-card">
+
+  <div class="section-title">
+    NOTE FOR
+  </div>
+
+  <h2 id="selectedDate">
+    Select a date
+  </h2>
+
+  <textarea
+    id="calendarNote"
+    placeholder="plans, reminders, thoughts, random things ♡"
+  ></textarea>
+
+  <button
+    class="primary-btn"
+    style="margin-top:8px"
+    onclick="saveCalendarNote()"
+  >
+    SAVE NOTE
+  </button>
+
+</section>
+
+</div>
+
+</main>
+
+
+<!-- =========================================================
+CAMERA
+========================================================= -->
+
+<main
+  id="cameraPage"
+  class="page"
+>
+
+<div class="camera-layout">
+
+<section class="glass camera-card">
+
+  <div class="section-title">
+    CAMERA
+  </div>
+
+  <h1
+    style="
+      margin:4px 0;
+      font-size:31px;
+      letter-spacing:-.06em
+    "
+  >
+    little camera ♡
+  </h1>
+
+  <div class="camera-stage">
+
+    <video
+      id="cameraVideo"
+      autoplay
+      playsinline
+      muted
+    ></video>
+
+    <div
+      id="cameraPlaceholder"
+      class="camera-placeholder"
+    >
+
+      <div>
+
+        <div style="font-size:43px">
+          📷
+        </div>
+
+        <strong>
+          camera is sleeping
+        </strong>
+
+        <div
+          style="
+            font-size:11px;
+            margin-top:7px
+          "
+        >
+          tap start to use your camera
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <div class="camera-controls">
+
+    <button
+      class="camera-small"
+      onclick="switchCamera()"
+    >
+      ↻
+    </button>
+
+    <button
+      class="camera-shutter"
+      onclick="takePhoto()"
+    ></button>
+
+    <button
+      class="camera-small"
+      onclick="startCamera()"
+    >
+      ▶
+    </button>
+
+  </div>
+
+
+  <div class="camera-tip">
+    portrait 9:16 • saved to your profile
+  </div>
+
+  <label class="camera-phone-label">
+    📱 TAKE FROM PHONE
+    <input
+      id="cameraPhoneInput"
+      class="camera-phone-input"
+      type="file"
+      accept="image/*"
+      capture="environment"
+      onchange="importCameraPhoto(event)"
+    >
+  </label>
+
+</section>
+
+
+<section class="glass camera-card">
+
+  <div class="section-title">
+    MY CAMERA ROLL
+  </div>
+
+  <h2 style="margin:4px 0 15px">
+    saved moments
+  </h2>
+
+  <div
+    id="savedPhotos"
+    class="saved-photos"
+  ></div>
+
+</section>
+
+</div>
+
+</main>
+
+
+<!-- =========================================================
+DIARY
+========================================================= -->
+
+<main
+  id="diaryPage"
+  class="page"
+>
+
+<div id="diaryLocked">
+
+<section class="glass diary-lock">
+
+  <div class="diary-heart">
+    ♡
+  </div>
+
+  <h1>
+    my diary
+  </h1>
+
+  <p>
+    This little corner is private to your profile.
+  </p>
+
+
+  <div class="diary-code">
+
+    <input
+      maxlength="1"
+      class="diary-digit"
+    >
+
+    <input
+      maxlength="1"
+      class="diary-digit"
+    >
+
+    <input
+      maxlength="1"
+      class="diary-digit"
+    >
+
+    <input
+      maxlength="1"
+      class="diary-digit"
+    >
+
+  </div>
+
+
+  <button
+    class="primary-btn"
+    onclick="unlockDiary()"
+  >
+    UNLOCK DIARY
+  </button>
+
+  <div
+    id="diaryError"
+    class="auth-note"
+  ></div>
+
+</section>
+
+</div>
+
+
+<div
+  id="diaryUnlocked"
+  class="hidden"
+>
+
+<div class="diary-page">
+
+<aside class="glass diary-sidebar">
+
+  <div class="section-title">
+    PRIVATE
+  </div>
+
+  <h2>
+    my diary ♡
+  </h2>
+
+  <p>
+    thoughts, dreams, secrets and
+    random 2am ideas.
+  </p>
+
+  <div
+    id="diaryDate"
+    class="diary-date"
+  >
+    today
+  </div>
+
+  <button
+    class="secondary-btn"
+    style="width:100%;margin-top:12px"
+    onclick="lockDiary()"
+  >
+    LOCK DIARY
+  </button>
+
+</aside>
+
+
+<section class="glass diary-area">
+
+  <div class="section-title">
+    ENTRY
+  </div>
+
+  <h2>
+    today's thoughts
+  </h2>
+
+  <textarea
+    id="diaryText"
+    placeholder="dear diary..."
+  ></textarea>
+
+  <div class="diary-toolbar">
+
+    <span
+      style="
+        font-size:10px;
+        color:#80638e
+      "
+    >
+      saved locally
+    </span>
+
+    <button
+      class="primary-btn"
+      onclick="saveDiary()"
+    >
+      SAVE ♡
+    </button>
+
+  </div>
+
+</section>
+
+</div>
+
+</div>
+
+</main>
+
+</div>
+</div>
+
+
+<!-- =========================================================
+CUSTOMIZE MODAL
+========================================================= -->
+
+<div
+  id="customModal"
+  class="modal"
+>
+
+<div class="modal-card">
+
+<button
+  class="modal-close"
+  onclick="closeCustomize()"
+>
+  ×
+</button>
+
+
+<div class="custom-panel">
+
+<div class="section-title">
+  MY WORLD
+</div>
+
+<h1>
+  customize ♡
+</h1>
+
+
+<div class="custom-group">
+
+<h3>
+  Profile
+</h3>
+
+<div class="custom-grid">
+
+<div class="custom-field">
+
+<label>
+  NAME
+</label>
+
+<input
+  id="customName"
+  maxlength="28"
+>
+
+</div>
+
+
+<div class="custom-field">
+
+<label>
+  GREETING
+</label>
+
+<input
+  id="customGreeting"
+  maxlength="60"
+>
+
+</div>
+
+
+<div class="custom-field">
+
+<label>
+  EYEBROW
+</label>
+
+<input
+  id="customEyebrow"
+  maxlength="60"
+>
+
+</div>
+
+
+<div class="custom-field">
+
+<label>
+  REMINDER
+</label>
+
+<input
+  id="customReminder"
+  maxlength="60"
+>
+
+</div>
+
+</div>
+
+</div>
+
+
+<div class="custom-group">
+
+<h3>
+  Avatar
+</h3>
+
+<img
+  id="customAvatarPreview"
+  class="avatar-preview"
+>
+
+<label class="file-btn">
+
+CHANGE AVATAR
+
+<input
+  id="avatarUpload"
+  type="file"
+  accept="image/*"
+>
+
+</label>
+
+</div>
+
+
+<div class="custom-group">
+
+<h3>
+  Colors
+</h3>
+
+<div style="display:flex;gap:12px">
+
+<div class="custom-field">
+
+<label>
+  PINK
+</label>
+
+<input
+  id="colorPink"
+  class="color-input"
+  type="color"
+>
+
+</div>
+
+
+<div class="custom-field">
+
+<label>
+  PURPLE
+</label>
+
+<input
+  id="colorPurple"
+  class="color-input"
+  type="color"
+>
+
+</div>
+
+
+<div class="custom-field">
+
+<label>
+  BLUE
+</label>
+
+<input
+  id="colorBlue"
+  class="color-input"
+  type="color"
+>
+
+</div>
+
+</div>
+
+</div>
+
+
+<div class="custom-group">
+
+<h3>
+  Change diary password
+</h3>
+
+<p
+  style="
+    font-size:11px;
+    color:#80638e
+  "
+>
+  The diary password can be anything 4+ characters.
+</p>
+
+<input
+  id="newDiaryPassword"
+  class="auth-input password-input"
+  maxlength="100"
+  placeholder="NEW PASSWORD"
+>
+
+<button
+  class="secondary-btn"
+  onclick="changeDiaryPassword()"
+>
+  CHANGE PASSWORD
+</button>
+
+</div>
+
+
+<div
+  style="
+    display:flex;
+    justify-content:space-between;
+    gap:8px;
+    flex-wrap:wrap;
+  "
+>
+
+<button
+  class="secondary-btn danger"
+  onclick="deleteCurrentProfile()"
+>
+  DELETE PROFILE
+</button>
+
+<button
+  class="primary-btn"
+  onclick="saveCustomization()"
+>
+  SAVE CHANGES ✦
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+
+<!-- PHOTO MODAL -->
+
+<div
+  id="photoModal"
+  class="modal"
+  onclick="closePhotoModal(event)"
+>
+
+<div class="modal-card">
+
+<button
+  class="modal-close"
+  onclick="closePhotoModal(event)"
+>
+  ×
+</button>
+
+<img id="modalPhoto">
+
+</div>
+
+</div>
+
+
+<div
+  id="toast"
+  class="toast"
+></div>
+
 
 <script>
-const $=id=>document.getElementById(id),AK="f5ve_accounts_v2",SK="f5ve_remembered_device_v2";let mode="signup",currentId=null;
-const accounts=()=>JSON.parse(localStorage.getItem(AK)||"{}"),save=a=>localStorage.setItem(AK,JSON.stringify(a));
-function toast(m){$("toast").textContent=m;$("toast").style.display="block";clearTimeout(window.tt);window.tt=setTimeout(()=>$("toast").style.display="none",2400)}
-function enter(id){let a=accounts()[id];if(!a)return;currentId=id;$("auth").classList.add("hidden");$("app").style.display="block";$("profileName").textContent=a.name;$("welcomeText").textContent=a.greeting||"Make this space yours.";$("customName").value=a.name;$("customGreeting").value=a.greeting||"";$("quickNote").value=a.note||"";$("calendarNote").value=a.calendarNote||"";$("diaryText").value=a.diary||"";$("photos").innerHTML="";(a.photos||[]).forEach(addPhoto)}
-function addPhoto(src){let i=document.createElement("img");i.src=src;$("photos").prepend(i)}
-function leave(){currentId=null;$("app").style.display="none";$("auth").classList.remove("hidden")}
-function switchMode(m){mode=m;$("signupTab").classList.toggle("active",m==="signup");$("loginTab").classList.toggle("active",m==="login");$("submitAuth").textContent=m==="signup"?"CREATE ACCOUNT ✦":"LOG IN ✦";$("password").autocomplete=m==="signup"?"new-password":"current-password"}
-$("signupTab").onclick=()=>switchMode("signup");$("loginTab").onclick=()=>switchMode("login");
-$("authForm").onsubmit=e=>{e.preventDefault();let n=$("username").value.trim(),p=$("password").value;if(p.length<4)return toast("Password must be at least 4 characters.");if(!n)return toast("Choose a username.");let a=accounts();if(mode==="signup"){if(Object.values(a).some(x=>x.name.toLowerCase()===n.toLowerCase()))return toast("That username already exists.");let id=n.replace(/[^a-z0-9]/gi,"").slice(0,20)+"_"+Date.now();a[id]={id,name:n,password:p,greeting:"welcome to my space ♡",note:"",calendarNote:"",diary:"",photos:[]};save(a);localStorage.setItem(SK,id);enter(id);toast("Account created ♡")}else{let f=Object.values(a).find(x=>x.name.toLowerCase()===n.toLowerCase()&&x.password===p);if(!f)return toast("Wrong username or password.");localStorage.setItem(SK,f.id);enter(f.id);toast("Welcome back ♡")}};
-$("googleBtn").onclick=()=>toast("Google login needs OAuth + a backend; this static file cannot securely do it.");
-$("logout").onclick=()=>{localStorage.removeItem(SK);leave();switchMode("login");toast("Logged out")};
-$("forgetDevice").onclick=()=>{localStorage.removeItem(SK);leave();switchMode("login");toast("This device was forgotten")};
-$("deleteAccount").onclick=()=>{if(!confirm("Delete this local account?"))return;let a=accounts();delete a[currentId];save(a);localStorage.removeItem(SK);leave();switchMode("signup")};
-$("saveNote").onclick=()=>{let a=accounts();a[currentId].note=$("quickNote").value;save(a);toast("Note saved ✦")};
-$("saveCalendar").onclick=()=>{let a=accounts();a[currentId].calendarNote=$("calendarNote").value;save(a);toast("Saved ♡")};
-$("unlockDiary").onclick=()=>{let a=accounts(),p=$("diaryPassword").value;if(!a[currentId].diaryPass){if(p.length<4)return toast("Diary password needs 4+ characters.");a[currentId].diaryPass=p;save(a);$("diaryArea").classList.remove("hidden");return toast("Diary password created ♡")}if(p===a[currentId].diaryPass){$("diaryArea").classList.remove("hidden");toast("Diary unlocked")}else toast("Wrong diary password")};
-$("saveDiary").onclick=()=>{let a=accounts();a[currentId].diary=$("diaryText").value;save(a);toast("Diary saved")};
-$("saveCustomize").onclick=()=>{let a=accounts();a[currentId].name=$("customName").value.trim()||a[currentId].name;a[currentId].greeting=$("customGreeting").value;save(a);enter(currentId);toast("Updated ✦")};
-$("photoInput").onchange=e=>{let f=e.target.files[0];if(!f)return;let r=new FileReader();r.onload=()=>{let a=accounts();a[currentId].photos=a[currentId].photos||[];a[currentId].photos.push(r.result);save(a);addPhoto(r.result);toast("Photo saved ♡")};r.readAsDataURL(f)};
-document.querySelectorAll(".nav button").forEach(b=>b.onclick=()=>{document.querySelectorAll(".nav button").forEach(x=>x.classList.remove("active"));document.querySelectorAll(".view").forEach(x=>x.classList.remove("active"));b.classList.add("active");$(b.dataset.view).classList.add("active")});
-$("sparkle").onclick=()=>toast("✦ sparkle sparkle ✦");
-function tick(){let d=new Date(),s=d.getHours()*3600+d.getMinutes()*60+d.getSeconds(),pct=s/86400*100;$("time").textContent=d.toLocaleTimeString([],{hour:"2-digit",minute:"2-digit"});$("date").textContent=d.toLocaleDateString([],{weekday:"long",year:"numeric",month:"long",day:"numeric"});$("dayProgress").style.width=pct+"%";$("progressText").textContent=Math.round(pct)+"% of today ✦"}setInterval(tick,1000);tick();
-let remembered=localStorage.getItem(SK);if(remembered&&accounts()[remembered])enter(remembered);
+
+/* ============================================================
+   DATABASE / STORAGE
+============================================================ */
+
+const DB_NAME="f5veWorld";
+const DB_VERSION=1;
+
+const PROFILE_KEY="f5ve_profiles_v3";
+
+/*
+  This is intentionally separate from the profile data.
+
+  If this browser has already authenticated before,
+  f5ve remembers the device and opens directly into
+  the profile without showing login every time.
+*/
+const DEVICE_KEY="f5ve_remembered_device";
+
+let db;
+let profiles={};
+let currentProfile=null;
+
+let use24h=true;
+let showSeconds=true;
+
+let cameraStream=null;
+let facingMode="user";
+
+let diaryUnlocked=false;
+
+let calendarDate=new Date();
+let selectedDateKey=todayKey();
+
+let tracks=[];
+let currentTrack=-1;
+
+const audio=document.getElementById("audio");
+
+
+/* ============================================================
+   BASIC HELPERS
+============================================================ */
+
+function $(id){
+  return document.getElementById(id);
+}
+
+
+function toast(text){
+
+  const el=$("toast");
+
+  el.textContent=text;
+
+  el.classList.add("show");
+
+  clearTimeout(window.toastTimer);
+
+  window.toastTimer=setTimeout(()=>{
+    el.classList.remove("show");
+  },2200);
+
+}
+
+
+function todayKey(date=new Date()){
+
+  return date.getFullYear()+"-"+
+    String(date.getMonth()+1).padStart(2,"0")+"-"+
+    String(date.getDate()).padStart(2,"0");
+
+}
+
+
+function escapeHTML(text=""){
+
+  return String(text)
+    .replaceAll("&","&amp;")
+    .replaceAll("<","&lt;")
+    .replaceAll(">","&gt;")
+    .replaceAll('"',"&quot;")
+    .replaceAll("'","&#039;");
+
+}
+
+
+function defaultImage(){
+
+  const svg=`
+  <svg xmlns="http://www.w3.org/2000/svg"
+       width="600"
+       height="600">
+
+    <defs>
+
+      <linearGradient
+        id="g"
+        x1="0"
+        y1="0"
+        x2="1"
+        y2="1"
+      >
+
+        <stop stop-color="#ff86c9"/>
+        <stop offset=".5" stop-color="#a987ff"/>
+        <stop offset="1" stop-color="#77e3e8"/>
+
+      </linearGradient>
+
+    </defs>
+
+    <rect
+      width="600"
+      height="600"
+      fill="url(#g)"
+    />
+
+    <circle
+      cx="470"
+      cy="130"
+      r="130"
+      fill="white"
+      opacity=".3"
+    />
+
+    <text
+      x="50%"
+      y="50%"
+      dominant-baseline="middle"
+      text-anchor="middle"
+      font-family="Arial"
+      font-weight="900"
+      font-size="110"
+      fill="white"
+    >
+      ♡
+    </text>
+
+  </svg>`;
+
+  return "data:image/svg+xml;charset=utf-8,"+
+    encodeURIComponent(svg);
+
+}
+
+
+/* ============================================================
+   PASSWORD
+============================================================ */
+
+/*
+  IMPORTANT:
+  Password may contain ANY character.
+
+  Only requirement:
+  minimum 4 characters.
+
+  Examples:
+  1234
+  hello
+  !@#$ 
+  my password
+  💗💗💗💗
+  f5ve!!!
+*/
+
+function validPassword(password){
+
+  return Array.from(
+    password
+  ).length>=4;
+
+}
+
+
+async function hashPassword(password){
+
+  const data=
+    new TextEncoder().encode(
+      password
+    );
+
+  const hash=
+    await crypto.subtle.digest(
+      "SHA-256",
+      data
+    );
+
+  return [...new Uint8Array(hash)]
+    .map(
+      b=>b.toString(16).padStart(2,"0")
+    )
+    .join("");
+
+}
+
+
+/* ============================================================
+   PROFILE ID
+============================================================ */
+
+function createProfileId(name){
+
+  const random=
+    crypto.randomUUID
+      ?crypto.randomUUID()
+      :Math.random()
+        .toString(36)
+        .slice(2);
+
+  return(
+    name
+      .toLowerCase()
+      .replace(/[^a-z0-9]+/g,"-")
+      .replace(/^-|-$/g,"")
+    +"_"+random
+  );
+
+}
+
+
+/* ============================================================
+   DATABASE
+============================================================ */
+
+function openDB(){
+
+  return new Promise((resolve,reject)=>{
+
+    const request=
+      indexedDB.open(
+        DB_NAME,
+        DB_VERSION
+      );
+
+    request.onupgradeneeded=e=>{
+
+      const database=
+        e.target.result;
+
+      if(
+        !database.objectStoreNames
+          .contains("photos")
+      ){
+
+        database.createObjectStore(
+          "photos",
+          {
+            keyPath:"id",
+            autoIncrement:true
+          }
+        );
+
+      }
+
+      if(
+        !database.objectStoreNames
+          .contains("tracks")
+      ){
+
+        database.createObjectStore(
+          "tracks",
+          {
+            keyPath:"id",
+            autoIncrement:true
+          }
+        );
+
+      }
+
+    };
+
+    request.onsuccess=e=>{
+
+      db=e.target.result;
+
+      resolve(db);
+
+    };
+
+    request.onerror=()=>{
+      reject(request.error);
+    };
+
+  });
+
+}
+
+
+function dbAdd(storeName,data){
+
+  return new Promise(
+    (resolve,reject)=>{
+
+      const tx=
+        db.transaction(
+          storeName,
+          "readwrite"
+        );
+
+      const req=
+        tx.objectStore(storeName)
+          .add(data);
+
+      req.onsuccess=()=>{
+        resolve(req.result);
+      };
+
+      req.onerror=()=>{
+        reject(req.error);
+      };
+
+    }
+  );
+
+}
+
+
+function dbGetAll(storeName){
+
+  return new Promise(
+    (resolve,reject)=>{
+
+      const tx=
+        db.transaction(
+          storeName,
+          "readonly"
+        );
+
+      const req=
+        tx.objectStore(storeName)
+          .getAll();
+
+      req.onsuccess=()=>{
+        resolve(req.result);
+      };
+
+      req.onerror=()=>{
+        reject(req.error);
+      };
+
+    }
+  );
+
+}
+
+
+function dbDelete(storeName,id){
+
+  return new Promise(
+    (resolve,reject)=>{
+
+      const tx=
+        db.transaction(
+          storeName,
+          "readwrite"
+        );
+
+      tx.objectStore(
+        storeName
+      ).delete(id);
+
+      tx.oncomplete=resolve;
+
+      tx.onerror=()=>{
+        reject(tx.error);
+      };
+
+    }
+  );
+
+}
+
+
+/* ============================================================
+   PROFILES
+============================================================ */
+
+function blankProfile(){
+
+  return {
+
+    name:"you",
+
+    passwordHash:null,
+
+    greeting:"hi ♡",
+
+    eyebrow:
+      "ONLINE IN MY OWN LITTLE WORLD",
+
+    reminder:
+      "make today cute.",
+
+    avatar:
+      defaultImage(),
+
+    colors:{
+      pink:"#ff75bd",
+      purple:"#a884ff",
+      blue:"#83d9ff"
+    },
+
+    settings:{
+      use24h:true,
+      showSeconds:true
+    },
+
+    notes:{},
+
+    diary:{
+      passwordHash:null,
+      entries:{}
+    },
+
+    friends:[]
+
+  };
+
+}
+
+
+function loadProfiles(){
+
+  try{
+
+    profiles=
+      JSON.parse(
+        localStorage.getItem(
+          PROFILE_KEY
+        )||"{}"
+      );
+
+  }catch{
+
+    profiles={};
+
+  }
+
+}
+
+
+function saveProfiles(){
+
+  localStorage.setItem(
+    PROFILE_KEY,
+    JSON.stringify(profiles)
+  );
+
+}
+
+
+/* ============================================================
+   SIGN UP / LOGIN UI
+============================================================ */
+
+function showLogin(){
+
+  $("signupView")
+    .classList
+    .add("hidden");
+
+  $("loginView")
+    .classList
+    .remove("hidden");
+
+  $("loginName").focus();
+
+}
+
+
+function showSignup(){
+
+  $("loginView")
+    .classList
+    .add("hidden");
+
+  $("signupView")
+    .classList
+    .remove("hidden");
+
+  $("signupName").focus();
+
+}
+
+
+/* ============================================================
+   SIGN UP
+============================================================ */
+
+async function signUp(){
+
+  const name=
+    $("signupName")
+      .value
+      .trim();
+
+  const password=
+    $("signupPassword")
+      .value;
+
+  if(!name){
+
+    toast(
+      "Choose a name first ♡"
+    );
+
+    return;
+
+  }
+
+
+  if(!validPassword(password)){
+
+    toast(
+      "Your password needs at least 4 characters."
+    );
+
+    return;
+
+  }
+
+
+  /*
+    Check if the exact profile name already exists.
+  */
+
+  const duplicate=
+    Object.values(profiles)
+      .some(
+        p=>
+          p.name
+            .toLowerCase()===
+          name.toLowerCase()
+      );
+
+  if(duplicate){
+
+    toast(
+      "That name is already being used."
+    );
+
+    return;
+
+  }
+
+
+  const id=
+    createProfileId(name);
+
+  const profile=
+    blankProfile();
+
+  profile.name=name;
+
+  profile.passwordHash=
+    await hashPassword(password);
+
+  /*
+    The first password also becomes
+    the diary password.
+  */
+
+  profile.diary.passwordHash=
+    await hashPassword(password);
+
+  profiles[id]=profile;
+
+  saveProfiles();
+
+  /*
+    Remember the device immediately.
+  */
+
+  rememberDevice(id);
+
+  await enterProfile(id);
+
+  $("signupName").value="";
+  $("signupPassword").value="";
+
+  toast(
+    "Account created ♡ Device remembered!"
+  );
+
+}
+
+
+/* ============================================================
+   NORMAL LOGIN
+============================================================ */
+
+async function login(){
+
+  const name=
+    $("loginName")
+      .value
+      .trim();
+
+  const password=
+    $("loginPassword")
+      .value;
+
+  $("loginError").textContent="";
+
+
+  if(!name){
+
+    $("loginError").textContent=
+      "Enter your name.";
+
+    return;
+
+  }
+
+
+  if(!validPassword(password)){
+
+    $("loginError").textContent=
+      "Password must be at least 4 characters.";
+
+    return;
+
+  }
+
+
+  let foundId=null;
+
+  for(
+    const id of Object.keys(profiles)
+  ){
+
+    if(
+      profiles[id]
+        .name
+        .toLowerCase()===
+      name.toLowerCase()
+    ){
+
+      foundId=id;
+      break;
+
+    }
+
+  }
+
+
+  if(!foundId){
+
+    $("loginError").textContent=
+      "I couldn't find that account.";
+
+    return;
+
+  }
+
+
+  const hash=
+    await hashPassword(password);
+
+
+  if(
+    hash!==
+    profiles[foundId].passwordHash
+  ){
+
+    $("loginError").textContent=
+      "Wrong password ♡";
+
+    return;
+
+  }
+
+
+  /*
+    SUCCESS:
+    remember this device forever
+    until the user logs out or
+    clears browser/site data.
+  */
+
+  rememberDevice(foundId);
+
+  await enterProfile(foundId);
+
+  $("loginName").value="";
+  $("loginPassword").value="";
+
+}
+
+
+/* ============================================================
+   REMEMBER DEVICE
+============================================================ */
+
+function rememberDevice(id){
+
+  /*
+    localStorage is used instead of a session key,
+    so closing/reopening the browser won't log the
+    user out.
+  */
+
+  localStorage.setItem(
+    DEVICE_KEY,
+    id
+  );
+
+}
+
+
+function forgetDevice(){
+
+  localStorage.removeItem(
+    DEVICE_KEY
+  );
+
+}
+
+
+/* ============================================================
+   ENTER PROFILE
+============================================================ */
+
+async function enterProfile(id){
+
+  if(!profiles[id]){
+    return;
+  }
+
+  currentProfile=id;
+
+  const p=
+    profiles[id];
+
+  $("authScreen")
+    .style
+    .display="none";
+
+  $("app")
+    .style
+    .display="block";
+
+
+  use24h=
+    p.settings?.use24h ??
+    true;
+
+  showSeconds=
+    p.settings?.showSeconds ??
+    true;
+
+
+  applyProfile();
+
+  await renderPhotos();
+
+  await loadTracks();
+
+  renderCalendar();
+
+  renderFriends();
+
+  updateDiaryView();
+
+  startClock();
+
+}
+
+
+/* ============================================================
+   LOGOUT
+============================================================ */
+
+function logoutProfile(){
+
+  stopCamera();
+
+  diaryUnlocked=false;
+
+  /*
+    IMPORTANT:
+    Logging out explicitly removes the remembered
+    device session.
+
+    The user will therefore need to log in again.
+  */
+
+  forgetDevice();
+
+  $("app")
+    .style
+    .display="none";
+
+  $("authScreen")
+    .style
+    .display="flex";
+
+  currentProfile=null;
+
+  $("loginName").value="";
+  $("loginPassword").value="";
+
+  showLogin();
+
+}
+
+
+/* ============================================================
+   AUTO LOGIN
+============================================================ */
+
+async function autoLogin(){
+
+  const remembered=
+    localStorage.getItem(
+      DEVICE_KEY
+    );
+
+  if(
+    remembered &&
+    profiles[remembered]
+  ){
+
+    /*
+      No login screen.
+      Straight into the user's profile.
+    */
+
+    await enterProfile(
+      remembered
+    );
+
+    return true;
+
+  }
+
+  return false;
+
+}
+
+
+/* ============================================================
+   PROFILE DISPLAY
+============================================================ */
+
+function applyProfile(){
+
+  const p=
+    profiles[currentProfile];
+
+  $("topName").textContent=
+    p.name;
+
+  $("homeName").textContent=
+    p.name;
+
+  $("greeting").textContent=
+    p.greeting;
+
+  $("homeEyebrow").textContent=
+    p.eyebrow;
+
+  $("homeReminder").textContent=
+    p.reminder;
+
+  $("topAvatar").src=
+    p.avatar;
+
+  $("homeAvatar").src=
+    p.avatar;
+
+
+  document.documentElement
+    .style
+    .setProperty(
+      "--pink",
+      p.colors.pink
+    );
+
+  document.documentElement
+    .style
+    .setProperty(
+      "--purple",
+      p.colors.purple
+    );
+
+  document.documentElement
+    .style
+    .setProperty(
+      "--blue",
+      p.colors.blue
+    );
+
+
+  $("formatBtn").textContent=
+    use24h
+      ?"24H"
+      :"12H";
+
+
+  $("secondsBtn")
+    .classList
+    .toggle(
+      "on",
+      showSeconds
+    );
+
+
+  $("formatBtn")
+    .classList
+    .toggle(
+      "on",
+      use24h
+    );
+
+
+  updateHomeFriends();
+
+  fillCustomize();
+
+}
+
+
+/* ============================================================
+   CLOCK
+============================================================ */
+
+let clockInterval;
+
+function startClock(){
+
+  clearInterval(
+    clockInterval
+  );
+
+  updateClock();
+
+  clockInterval=
+    setInterval(
+      updateClock,
+      1000
+    );
+
+}
+
+
+function updateClock(){
+
+  const now=
+    new Date();
+
+  let hours=
+    now.getHours();
+
+  let suffix="";
+
+
+  if(!use24h){
+
+    suffix=
+      hours>=12
+        ?" PM"
+        :" AM";
+
+    hours=
+      hours%12||12;
+
+  }
+
+
+  const hh=
+    String(hours)
+      .padStart(2,"0");
+
+  const mm=
+    String(
+      now.getMinutes()
+    ).padStart(2,"0");
+
+  const ss=
+    String(
+      now.getSeconds()
+    ).padStart(2,"0");
+
+
+  $("clock").textContent=
+    `${hh}:${mm}${showSeconds?":"+ss:""}${suffix}`;
+
+
+  $("date").textContent=
+    now.toLocaleDateString(
+      undefined,
+      {
+        weekday:"long",
+        year:"numeric",
+        month:"long",
+        day:"numeric"
+      }
+    );
+
+
+  const seconds=
+    now.getHours()*3600+
+    now.getMinutes()*60+
+    now.getSeconds();
+
+
+  const percent=
+    seconds/86400*100;
+
+
+  $("dayProgress").style.width=
+    percent+"%";
+
+
+  $("progressPercent").textContent=
+    Math.round(percent)+"%";
+
+}
+
+
+function toggle24h(){
+
+  use24h=!use24h;
+
+  profiles[currentProfile]
+    .settings
+    .use24h=
+    use24h;
+
+  saveProfiles();
+
+  applyProfile();
+
+}
+
+
+function toggleSeconds(){
+
+  showSeconds=!showSeconds;
+
+  profiles[currentProfile]
+    .settings
+    .showSeconds=
+    showSeconds;
+
+  saveProfiles();
+
+  applyProfile();
+
+}
+
+
+/* ============================================================
+   NAVIGATION
+============================================================ */
+
+function showPage(
+  name,
+  button
+){
+
+  document
+    .querySelectorAll(".page")
+    .forEach(
+      page=>{
+        page.classList
+          .remove("active");
+      }
+    );
+
+
+  $(name+"Page")
+    .classList
+    .add("active");
+
+
+  document
+    .querySelectorAll(".nav button")
+    .forEach(
+      btn=>{
+        btn.classList
+          .remove("active");
+      }
+    );
+
+
+  if(button){
+    button.classList
+      .add("active");
+  }
+
+
+  if(name==="camera"){
+
+    startCamera();
+
+  }else{
+
+    stopCamera();
+
+  }
+
+
+  if(name==="friends"){
+    renderFriends();
+  }
+
+
+  if(name==="diary"){
+    updateDiaryView();
+  }
+
+}
+
+
+function goFriends(){
+
+  showPage(
+    "friends",
+    document.querySelector(
+      '[data-page="friends"]'
+    )
+  );
+
+}
+
+
+/* ============================================================
+   FRIENDS
+============================================================ */
+
+function friendCodeForProfile(id){
+
+  let hash=0;
+
+  for(
+    let i=0;
+    i<id.length;
+    i++
+  ){
+
+    hash=
+      ((hash<<5)-hash)+
+      id.charCodeAt(i);
+
+    hash|=0;
+
+  }
+
+
+  const chars=
+    "ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
+
+  let code="";
+
+  let n=
+    Math.abs(hash);
+
+
+  for(
+    let i=0;
+    i<6;
+    i++
+  ){
+
+    code+=
+      chars[
+        n%chars.length
+      ];
+
+    n=
+      Math.floor(n/chars.length)+
+      id.length*17;
+
+  }
+
+
+  return code;
+
+}
+
+
+function findProfileByFriendCode(
+  code
+){
+
+  const target=
+    code
+      .trim()
+      .toUpperCase();
+
+
+  for(
+    const id of Object.keys(profiles)
+  ){
+
+    if(
+      friendCodeForProfile(id)===
+      target
+    ){
+
+      return id;
+
+    }
+
+  }
+
+  return null;
+
+}
+
+
+function renderFriends(){
+
+  if(!currentProfile){
+    return;
+  }
+
+
+  $("myFriendCode")
+    .textContent=
+    friendCodeForProfile(
+      currentProfile
+    );
+
+
+  const friendIds=
+    profiles[currentProfile]
+      .friends||[];
+
+
+  const container=
+    $("friendList");
+
+
+  if(!friendIds.length){
+
+    container.innerHTML=`
+
+      <div
+        style="
+          padding:28px 10px;
+          text-align:center;
+          color:#81648d;
+          font-size:12px;
+        "
+      >
+
+        No friends yet ♡<br>
+        Give someone your code!
+
+      </div>
+
+    `;
+
+
+    updateHomeFriends();
+
+    return;
+
+  }
+
+
+  container.innerHTML="";
+
+
+  friendIds.forEach(
+    friendId=>{
+
+      const friend=
+        profiles[friendId];
+
+      if(!friend){
+        return;
+      }
+
+
+      const row=
+        document.createElement(
+          "div"
+        );
+
+      row.className=
+        "friend-row";
+
+
+      row.innerHTML=`
+
+        <img
+          src="${friend.avatar}"
+        >
+
+        <div class="friend-info">
+
+          <strong>
+            ${escapeHTML(
+              friend.name
+            )}
+          </strong>
+
+          <span>
+            <i class="online-dot"></i>
+            friend
+          </span>
+
+        </div>
+
+        <button
+          class="friend-action"
+        >
+          ♡ FRIEND
+        </button>
+
+      `;
+
+
+      container.appendChild(
+        row
+      );
+
+    }
+  );
+
+
+  updateHomeFriends();
+
+}
+
+
+function updateHomeFriends(){
+
+  if(!currentProfile){
+    return;
+  }
+
+
+  const count=
+    profiles[currentProfile]
+      .friends?.length||0;
+
+
+  $("homeFriendCount")
+    .textContent=
+      `${count} friend${count===1?"":"s"}`;
+
+}
+
+
+function addFriend(){
+
+  const input=
+    $("friendCodeInput");
+
+
+  const code=
+    input.value
+      .trim()
+      .toUpperCase();
+
+
+  if(!code){
+
+    toast(
+      "Enter a friend code ♡"
+    );
+
+    return;
+
+  }
+
+
+  const friendId=
+    findProfileByFriendCode(
+      code
+    );
+
+
+  if(!friendId){
+
+    toast(
+      "I couldn't find that profile."
+    );
+
+    return;
+
+  }
+
+
+  if(
+    friendId===
+    currentProfile
+  ){
+
+    toast(
+      "You can't add yourself ♡"
+    );
+
+    return;
+
+  }
+
+
+  const me=
+    profiles[currentProfile];
+
+
+  if(!me.friends){
+    me.friends=[];
+  }
+
+
+  if(
+    me.friends.includes(
+      friendId
+    )
+  ){
+
+    toast(
+      "You're already friends ♡"
+    );
+
+    return;
+
+  }
+
+
+  me.friends.push(
+    friendId
+  );
+
+
+  const friend=
+    profiles[friendId];
+
+
+  if(!friend.friends){
+    friend.friends=[];
+  }
+
+
+  if(
+    !friend.friends.includes(
+      currentProfile
+    )
+  ){
+
+    friend.friends.push(
+      currentProfile
+    );
+
+  }
+
+
+  saveProfiles();
+
+  input.value="";
+
+  renderFriends();
+
+  toast(
+    `You and ${friend.name} are friends ♡`
+  );
+
+}
+
+
+function copyFriendCode(){
+
+  const code=
+    friendCodeForProfile(
+      currentProfile
+    );
+
+
+  if(navigator.clipboard){
+
+    navigator.clipboard
+      .writeText(code)
+      .then(()=>{
+        toast(
+          "Friend code copied ♡"
+        );
+      });
+
+  }else{
+
+    toast(code);
+
+  }
+
+}
+
+
+/* ============================================================
+   CALENDAR
+============================================================ */
+
+function renderCalendar(){
+
+  const year=
+    calendarDate.getFullYear();
+
+  const month=
+    calendarDate.getMonth();
+
+
+  $("calendarTitle")
+    .textContent=
+      calendarDate.toLocaleDateString(
+        undefined,
+        {
+          month:"long",
+          year:"numeric"
+        }
+      );
+
+
+  const first=
+    new Date(
+      year,
+      month,
+      1
+    );
+
+
+  let start=
+    first.getDay();
+
+  start=
+    (start+6)%7;
+
+
+  const days=
+    new Date(
+      year,
+      month+1,
+      0
+    ).getDate();
+
+
+  const grid=
+    $("calendarGrid");
+
+
+  grid.innerHTML="";
+
+
+  for(
+    let i=0;
+    i<start;
+    i++
+  ){
+
+    grid.appendChild(
+      document.createElement(
+        "div"
+      )
+    );
+
+  }
+
+
+  for(
+    let d=1;
+    d<=days;
+    d++
+  ){
+
+    const date=
+      new Date(
+        year,
+        month,
+        d
+      );
+
+
+    const key=
+      todayKey(date);
+
+
+    const button=
+      document.createElement(
+        "button"
+      );
+
+
+    button.className=
+      "day";
+
+
+    if(
+      key===
+      todayKey()
+    ){
+
+      button.classList
+        .add("today");
+
+    }
+
+
+    if(
+      profiles[currentProfile]
+        .notes[key]
+    ){
+
+      button.classList
+        .add("has-note");
+
+    }
+
+
+    button.textContent=d;
+
+
+    button.onclick=()=>{
+      selectCalendarDate(key);
+    };
+
+
+    grid.appendChild(
+      button
+    );
+
+  }
+
+
+  selectCalendarDate(
+    selectedDateKey
+  );
+
+}
+
+
+function selectCalendarDate(
+  key
+){
+
+  selectedDateKey=key;
+
+
+  const date=
+    new Date(
+      key+"T12:00:00"
+    );
+
+
+  $("selectedDate")
+    .textContent=
+      date.toLocaleDateString(
+        undefined,
+        {
+          weekday:"long",
+          month:"long",
+          day:"numeric",
+          year:"numeric"
+        }
+      );
+
+
+  $("calendarNote")
+    .value=
+      profiles[currentProfile]
+        .notes[key]||"";
+
+}
+
+
+function changeMonth(
+  amount
+){
+
+  calendarDate.setMonth(
+    calendarDate.getMonth()+
+    amount
+  );
+
+  renderCalendar();
+
+}
+
+
+function saveCalendarNote(){
+
+  profiles[currentProfile]
+    .notes[selectedDateKey]=
+    $("calendarNote")
+      .value;
+
+
+  saveProfiles();
+
+  renderCalendar();
+
+  toast(
+    "Note saved ♡"
+  );
+
+}
+
+
+function goTodayNote(){
+
+  calendarDate=
+    new Date();
+
+  selectedDateKey=
+    todayKey();
+
+
+  showPage(
+    "calendar",
+    document.querySelector(
+      '[data-page="calendar"]'
+    )
+  );
+
+
+  renderCalendar();
+
+}
+
+
+/* ============================================================
+   DIARY
+============================================================ */
+
+function updateDiaryView(){
+
+  if(diaryUnlocked){
+
+    $("diaryLocked")
+      .classList
+      .add("hidden");
+
+    $("diaryUnlocked")
+      .classList
+      .remove("hidden");
+
+    loadDiaryEntry();
+
+  }else{
+
+    $("diaryLocked")
+      .classList
+      .remove("hidden");
+
+    $("diaryUnlocked")
+      .classList
+      .add("hidden");
+
+    document
+      .querySelectorAll(
+        ".diary-digit"
+      )
+      .forEach(
+        x=>{
+          x.value="";
+        }
+      );
+
+  }
+
+}
+
+
+async function unlockDiary(){
+
+  const password=
+    [
+      ...document.querySelectorAll(
+        ".diary-digit"
+      )
+    ]
+    .map(x=>x.value)
+    .join("");
+
+
+  if(!validPassword(password)){
+
+    $("diaryError")
+      .textContent=
+      "Enter at least 4 characters.";
+
+    return;
+
+  }
+
+
+  const hash=
+    await hashPassword(
+      password
+    );
+
+
+  if(
+    hash===
+    profiles[currentProfile]
+      .diary
+      .passwordHash
+  ){
+
+    diaryUnlocked=true;
+
+    $("diaryError")
+      .textContent="";
+
+    updateDiaryView();
+
+    toast(
+      "Diary unlocked ♡"
+    );
+
+  }else{
+
+    $("diaryError")
+      .textContent=
+      "Wrong password.";
+
+  }
+
+}
+
+
+function lockDiary(){
+
+  diaryUnlocked=false;
+
+  updateDiaryView();
+
+  toast(
+    "Diary locked ♡"
+  );
+
+}
+
+
+function loadDiaryEntry(){
+
+  const key=
+    todayKey();
+
+
+  $("diaryDate")
+    .textContent=
+      new Date()
+        .toLocaleDateString(
+          undefined,
+          {
+            weekday:"long",
+            month:"long",
+            day:"numeric",
+            year:"numeric"
+          }
+        );
+
+
+  $("diaryText")
+    .value=
+      profiles[currentProfile]
+        .diary
+        .entries[key]||"";
+
+}
+
+
+function saveDiary(){
+
+  profiles[currentProfile]
+    .diary
+    .entries[todayKey()]=
+    $("diaryText")
+      .value;
+
+
+  saveProfiles();
+
+  toast(
+    "Diary entry saved ♡"
+  );
+
+}
+
+
+/* Diary input boxes */
+
+document.addEventListener(
+  "input",
+  e=>{
+
+    if(
+      !e.target.classList
+        .contains("diary-digit")
+    ){
+
+      return;
+
+    }
+
+
+    /*
+      The diary remains 4 characters,
+      but each box now accepts ANY
+      character rather than only numbers.
+    */
+
+    const chars=
+      Array.from(
+        e.target.value
+      );
+
+    e.target.value=
+      chars.length
+        ?chars[chars.length-1]
+        :"";
+
+
+    if(e.target.value){
+
+      const inputs=[
+        ...document.querySelectorAll(
+          ".diary-digit"
+        )
+      ];
+
+
+      const index=
+        inputs.indexOf(
+          e.target
+        );
+
+
+      if(
+        index<
+        inputs.length-1
+      ){
+
+        inputs[index+1]
+          .focus();
+
+      }
+
+    }
+
+  }
+);
+
+
+document.addEventListener(
+  "keydown",
+  e=>{
+
+    if(
+      !e.target.classList
+        .contains("diary-digit")
+    ){
+
+      return;
+
+    }
+
+
+    if(
+      e.key==="Backspace" &&
+      !e.target.value
+    ){
+
+      const inputs=[
+        ...document.querySelectorAll(
+          ".diary-digit"
+        )
+      ];
+
+
+      const index=
+        inputs.indexOf(
+          e.target
+        );
+
+
+      if(index>0){
+
+        inputs[index-1]
+          .focus();
+
+      }
+
+    }
+
+
+    if(
+      e.key==="Enter"
+    ){
+
+      unlockDiary();
+
+    }
+
+  }
+);
+
+
+/* ============================================================
+   CAMERA
+============================================================ */
+
+async function startCamera(){
+
+  if(cameraStream){
+    return;
+  }
+
+
+  if(
+    !navigator.mediaDevices ||
+    !navigator.mediaDevices
+      .getUserMedia
+  ){
+
+    $("cameraPlaceholder")
+      .innerHTML=`
+
+        <div>
+
+          <div style="font-size:40px">
+            ♡
+          </div>
+
+          <strong>
+            camera unavailable
+          </strong>
+
+          <div
+            style="
+              font-size:11px;
+              margin-top:7px
+            "
+          >
+            Use HTTPS or localhost.
+          </div>
+
+        </div>
+
+      `;
+
+    return;
+
+  }
+
+
+  try{
+
+    cameraStream=
+      await navigator.mediaDevices
+        .getUserMedia({
+
+          video:{
+            facingMode:
+              facingMode,
+
+            aspectRatio:{
+              ideal:9/16
+            }
+          },
+
+          audio:false
+
+        });
+
+
+    $("cameraVideo")
+      .srcObject=
+      cameraStream;
+
+
+    $("cameraPlaceholder")
+      .classList
+      .add("hidden");
+
+  }catch(error){
+
+    console.error(error);
+
+
+    $("cameraPlaceholder")
+      .innerHTML=`
+
+        <div>
+
+          <div style="font-size:40px">
+            📷
+          </div>
+
+          <strong>
+            camera permission needed
+          </strong>
+
+          <div
+            style="
+              font-size:11px;
+              margin-top:7px
+            "
+          >
+            Allow camera access and try again.
+          </div>
+
+        </div>
+
+      `;
+
+
+    $("cameraPlaceholder")
+      .classList
+      .remove("hidden");
+
+  }
+
+}
+
+
+function stopCamera(){
+
+  if(cameraStream){
+
+    cameraStream
+      .getTracks()
+      .forEach(
+        track=>{
+          track.stop();
+        }
+      );
+
+    cameraStream=null;
+
+  }
+
+}
+
+
+async function switchCamera(){
+
+  facingMode=
+    facingMode==="user"
+      ?"environment"
+      :"user";
+
+  stopCamera();
+
+  await startCamera();
+
+}
+
+
+async function takePhoto(){
+
+  if(!cameraStream){
+
+    await startCamera();
+
+    if(!cameraStream){
+      return;
+    }
+
+  }
+
+
+  const video=
+    $("cameraVideo");
+
+
+  if(
+    video.readyState<2
+  ){
+
+    toast(
+      "Camera is still waking up..."
+    );
+
+    return;
+
+  }
+
+
+  const width=1080;
+  const height=1920;
+
+
+  const canvas=
+    document.createElement(
+      "canvas"
+    );
+
+
+  canvas.width=width;
+  canvas.height=height;
+
+
+  const ctx=
+    canvas.getContext("2d");
+
+
+  const vw=
+    video.videoWidth;
+
+  const vh=
+    video.videoHeight;
+
+
+  const target=9/16;
+
+  const source=
+    vw/vh;
+
+
+  let sx=0;
+  let sy=0;
+  let sw=vw;
+  let sh=vh;
+
+
+  if(source>target){
+
+    sw=
+      vh*target;
+
+    sx=
+      (vw-sw)/2;
+
+  }else{
+
+    sh=
+      vw/target;
+
+    sy=
+      (vh-sh)/2;
+
+  }
+
+
+  if(
+    facingMode==="user"
+  ){
+
+    ctx.translate(
+      width,
+      0
+    );
+
+    ctx.scale(
+      -1,
+      1
+    );
+
+  }
+
+
+  ctx.drawImage(
+    video,
+    sx,
+    sy,
+    sw,
+    sh,
+    0,
+    0,
+    width,
+    height
+  );
+
+
+  canvas.toBlob(
+    async blob=>{
+
+      if(!blob){
+        return;
+      }
+
+
+      await dbAdd(
+        "photos",
+        {
+          profileId:
+            currentProfile,
+
+          created:
+            Date.now(),
+
+          blob
+        }
+      );
+
+
+      await renderPhotos();
+
+      toast(
+        "Photo saved ♡"
+      );
+
+    },
+    "image/jpeg",
+    .91
+  );
+
+}
+
+
+/* ============================================================
+   PHOTOS
+============================================================ */
+
+async function getMyPhotos(){
+
+  const all=
+    await dbGetAll(
+      "photos"
+    );
+
+
+  return all
+    .filter(
+      p=>
+        p.profileId===
+        currentProfile
+    )
+    .sort(
+      (a,b)=>
+        b.created-a.created
+    );
+
+}
+
+
+async function renderPhotos(){
+
+  const photos=
+    await getMyPhotos();
+
+
+  $("photoCount")
+    .textContent=
+      `${photos.length} photo${photos.length===1?"":"s"}`;
+
+
+  renderSavedPhotos(
+    photos
+  );
+
+  renderCollage(
+    photos
+  );
+
+}
+
+
+function renderSavedPhotos(
+  photos
+){
+
+  const box=
+    $("savedPhotos");
+
+
+  if(!photos.length){
+
+    box.innerHTML=`
+
+      <div
+        style="
+          grid-column:1/-1;
+          text-align:center;
+          padding:28px 10px;
+          color:#81648d;
+          font-size:12px;
+        "
+      >
+
+        No photos yet ♡<br>
+        Take your first one!
+
+      </div>
+
+    `;
+
+    return;
+
+  }
+
+
+  box.innerHTML="";
+
+
+  photos.forEach(
+    photo=>{
+
+      const url=
+        URL.createObjectURL(
+          photo.blob
+        );
+
+
+      const item=
+        document.createElement(
+          "div"
+        );
+
+
+      item.className=
+        "saved-photo";
+
+
+      item.innerHTML=`
+
+        <img src="${url}">
+
+        <button
+          class="delete-photo"
+        >
+          ×
+        </button>
+
+      `;
+
+
+      item.querySelector(
+        "img"
+      ).onclick=()=>{
+        openPhotoModal(url);
+      };
+
+
+      item.querySelector(
+        ".delete-photo"
+      ).onclick=
+        async e=>{
+
+          e.stopPropagation();
+
+          await dbDelete(
+            "photos",
+            photo.id
+          );
+
+          await renderPhotos();
+
+          toast(
+            "Photo deleted."
+          );
+
+        };
+
+
+      box.appendChild(
+        item
+      );
+
+    }
+  );
+
+}
+
+
+function renderCollage(
+  photos
+){
+
+  const track=
+    $("collageTrack");
+
+
+  if(!photos.length){
+
+    track.innerHTML=`
+
+      <div class="photo-empty">
+
+        <div>
+
+          <strong>
+            your collage is empty ♡
+          </strong>
+
+          Take pictures in CAMERA
+          and they'll appear here.
+
+        </div>
+
+      </div>
+
+    `;
+
+    return;
+
+  }
+
+
+  const duplicated=
+    [
+      ...photos,
+      ...photos
+    ];
+
+
+  track.innerHTML="";
+
+
+  duplicated.forEach(
+    (photo,index)=>{
+
+      const url=
+        URL.createObjectURL(
+          photo.blob
+        );
+
+
+      const item=
+        document.createElement(
+          "div"
+        );
+
+
+      item.className=
+        "polaroid";
+
+
+      item.style.setProperty(
+        "--rotate",
+        [-5,-2,3,5,-3,2]
+          [index%6]+"deg"
+      );
+
+
+      item.innerHTML=`
+        <img src="${url}">
+      `;
+
+
+      item.onclick=()=>{
+        openPhotoModal(url);
+      };
+
+
+      track.appendChild(
+        item
+      );
+
+    }
+  );
+
+}
+
+
+function openPhotoModal(
+  url
+){
+
+  $("modalPhoto").src=
+    url;
+
+  $("photoModal")
+    .classList
+    .add("show");
+
+}
+
+
+function closePhotoModal(
+  e
+){
+
+  if(e){
+    e.stopPropagation();
+  }
+
+  $("photoModal")
+    .classList
+    .remove("show");
+
+}
+
+
+/* ============================================================
+   MUSIC
+============================================================ */
+
+async function loadTracks(){
+
+  const all=
+    await dbGetAll(
+      "tracks"
+    );
+
+
+  tracks=
+    all
+      .filter(
+        x=>
+          x.profileId===
+          currentProfile
+      )
+      .sort(
+        (a,b)=>
+          a.created-b.created
+      );
+
+
+  renderPlaylist();
+
+
+  if(
+    tracks.length &&
+    !audio.src
+  ){
+
+    loadTrack(
+      0,
+      false
+    );
+
+  }
+
+}
+
+
+function renderPlaylist(){
+
+  const box=
+    $("playlist");
+
+
+  if(!tracks.length){
+
+    box.innerHTML=`
+
+      <div
+        style="
+          padding:10px;
+          color:#80638e;
+          font-size:11px;
+        "
+      >
+        Your songs will appear here.
+      </div>
+
+    `;
+
+    return;
+
+  }
+
+
+  box.innerHTML="";
+
+
+  tracks.forEach(
+    (track,index)=>{
+
+      const row=
+        document.createElement(
+          "div"
+        );
+
+
+      row.className=
+        "track"+
+        (
+          index===currentTrack
+            ?" active"
+            :""
+        );
+
+
+      row.innerHTML=`
+
+        <img
+          class="track-art"
+          src="${track.art||defaultImage()}"
+        >
+
+        <div class="track-info">
+
+          <strong>
+            ${escapeHTML(
+              track.title||
+              "untitled"
+            )}
+          </strong>
+
+          <span>
+            ${escapeHTML(
+              track.artist||
+              "unknown artist"
+            )}
+          </span>
+
+        </div>
+
+      `;
+
+
+      row.onclick=()=>{
+        loadTrack(
+          index,
+          true
+        );
+      };
+
+
+      box.appendChild(
+        row
+      );
+
+    }
+  );
+
+}
+
+
+async function loadTrack(
+  index,
+  autoplay=true
+){
+
+  if(!tracks[index]){
+    return;
+  }
+
+
+  currentTrack=index;
+
+
+  const track=
+    tracks[index];
+
+
+  if(window.audioURL){
+
+    URL.revokeObjectURL(
+      window.audioURL
+    );
+
+  }
+
+
+  window.audioURL=
+    URL.createObjectURL(
+      track.blob
+    );
+
+
+  audio.src=
+    window.audioURL;
+
+
+  $("musicTitle")
+    .textContent=
+      track.title||
+      "untitled";
+
+
+  $("musicArtist")
+    .textContent=
+      track.artist||
+      "unknown artist";
+
+
+  $("miniTitle")
+    .textContent=
+      track.title||
+      "untitled";
+
+
+  $("miniArtist")
+    .textContent=
+      track.artist||
+      "unknown artist";
+
+
+  $("musicCover")
+    .src=
+      track.art||
+      defaultImage();
+
+
+  $("miniAlbum")
+    .src=
+      track.art||
+      defaultImage();
+
+
+  renderPlaylist();
+
+
+  if(autoplay){
+
+    try{
+
+      await audio.play();
+
+    }catch{}
+
+  }
+
+
+  updatePlayerState();
+
+}
+
+
+function togglePlay(){
+
+  if(!tracks.length){
+
+    toast(
+      "Add an MP3 first ♡"
+    );
+
+    return;
+
+  }
+
+
+  if(!audio.src){
+
+    loadTrack(
+      0,
+      true
+    );
+
+    return;
+
+  }
+
+
+  if(audio.paused){
+
+    audio.play();
+
+  }else{
+
+    audio.pause();
+
+  }
+
+}
+
+
+function updatePlayerState(){
+
+  const playing=
+    !audio.paused;
+
+
+  $("playButton")
+    .textContent=
+      playing
+        ?"Ⅱ"
+        :"▶";
+
+
+  $("miniPlay")
+    .textContent=
+      playing
+        ?"Ⅱ"
+        :"▶";
+
+
+  $("visualizer")
+    .classList
+    .toggle(
+      "playing",
+      playing
+    );
+
+}
+
+
+function nextTrack(){
+
+  if(!tracks.length){
+    return;
+  }
+
+
+  const next=
+    currentTrack<0
+      ?0
+      :(currentTrack+1)%
+        tracks.length;
+
+
+  loadTrack(
+    next,
+    true
+  );
+
+}
+
+
+function previousTrack(){
+
+  if(!tracks.length){
+    return;
+  }
+
+
+  if(
+    audio.currentTime>3
+  ){
+
+    audio.currentTime=0;
+
+    return;
+
+  }
+
+
+  const previous=
+    currentTrack<=0
+      ?tracks.length-1
+      :currentTrack-1;
+
+
+  loadTrack(
+    previous,
+    true
+  );
+
+}
+
+
+function formatTime(
+  seconds
+){
+
+  if(
+    !Number.isFinite(seconds)
+  ){
+
+    return "0:00";
+
+  }
+
+
+  const mins=
+    Math.floor(
+      seconds/60
+    );
+
+
+  const secs=
+    Math.floor(
+      seconds%60
+    )
+    .toString()
+    .padStart(2,"0");
+
+
+  return `${mins}:${secs}`;
+
+}
+
+
+audio.addEventListener(
+  "timeupdate",
+  ()=>{
+
+    if(audio.duration){
+
+      $("seek").value=
+        audio.currentTime/
+        audio.duration*
+        100;
+
+    }
+
+
+    $("currentTime")
+      .textContent=
+        formatTime(
+          audio.currentTime
+        );
+
+  }
+);
+
+
+audio.addEventListener(
+  "loadedmetadata",
+  ()=>{
+
+    $("duration")
+      .textContent=
+        formatTime(
+          audio.duration
+        );
+
+  }
+);
+
+
+audio.addEventListener(
+  "play",
+  updatePlayerState
+);
+
+
+audio.addEventListener(
+  "pause",
+  updatePlayerState
+);
+
+
+audio.addEventListener(
+  "ended",
+  nextTrack
+);
+
+
+$("seek").addEventListener(
+  "input",
+  e=>{
+
+    if(audio.duration){
+
+      audio.currentTime=
+        Number(
+          e.target.value
+        )/100*
+        audio.duration;
+
+    }
+
+  }
+);
+
+
+/* MP3 uploads */
+
+$("audioUpload")
+  .addEventListener(
+    "change",
+    async e=>{
+
+      const files=
+        [...e.target.files];
+
+
+      for(
+        const file of files
+      ){
+
+        const metadata=
+          await readMP3Metadata(
+            file
+          );
+
+
+        await dbAdd(
+          "tracks",
+          {
+
+            profileId:
+              currentProfile,
+
+            created:
+              Date.now()+
+              Math.random(),
+
+            blob:file,
+
+            title:
+              metadata.title||
+              file.name.replace(
+                /\.[^.]+$/,
+                ""
+              ),
+
+            artist:
+              metadata.artist||
+              "unknown artist",
+
+            album:
+              metadata.album||
+              "",
+
+            year:
+              metadata.year||
+              "",
+
+            art:
+              metadata.art||
+              defaultImage()
+
+          }
+        );
+
+      }
+
+
+      e.target.value="";
+
+
+      await loadTracks();
+
+
+      toast(
+        files.length===1
+          ?"Song added ♡"
+          :`${files.length} songs added ♡`
+      );
+
+    }
+  );
+
+
+/* ============================================================
+   ID3
+============================================================ */
+
+async function readMP3Metadata(
+  file
+){
+
+  const result={
+    title:"",
+    artist:"",
+    album:"",
+    year:"",
+    art:""
+  };
+
+
+  try{
+
+    const buffer=
+      await file
+        .slice(
+          0,
+          4*1024*1024
+        )
+        .arrayBuffer();
+
+
+    const bytes=
+      new Uint8Array(
+        buffer
+      );
+
+
+    if(
+      bytes[0]===0x49 &&
+      bytes[1]===0x44 &&
+      bytes[2]===0x33
+    ){
+
+      const major=
+        bytes[3];
+
+
+      const size=
+        syncsafe(
+          bytes[6],
+          bytes[7],
+          bytes[8],
+          bytes[9]
+        );
+
+
+      let pos=10;
+
+
+      const end=
+        Math.min(
+          10+size,
+          bytes.length
+        );
+
+
+      while(
+        pos+10<=end
+      ){
+
+        const id=
+          String.fromCharCode(
+            bytes[pos],
+            bytes[pos+1],
+            bytes[pos+2],
+            bytes[pos+3]
+          );
+
+
+        let frameSize;
+
+
+        if(major===4){
+
+          frameSize=
+            syncsafe(
+              bytes[pos+4],
+              bytes[pos+5],
+              bytes[pos+6],
+              bytes[pos+7]
+            );
+
+        }else{
+
+          frameSize=
+            (
+              bytes[pos+4]<<24
+            )+
+            (
+              bytes[pos+5]<<16
+            )+
+            (
+              bytes[pos+6]<<8
+            )+
+            bytes[pos+7];
+
+        }
+
+
+        if(
+          !id.trim()||
+          frameSize<=0
+        ){
+
+          pos+=10;
+          continue;
+
+        }
+
+
+        const start=
+          pos+10;
+
+
+        const endFrame=
+          Math.min(
+            start+frameSize,
+            end
+          );
+
+
+        const frame=
+          bytes.slice(
+            start,
+            endFrame
+          );
+
+
+        if(id==="TIT2"){
+          result.title=
+            decodeID3Text(frame);
+        }
+
+
+        if(id==="TPE1"){
+          result.artist=
+            decodeID3Text(frame);
+        }
+
+
+        if(id==="TALB"){
+          result.album=
+            decodeID3Text(frame);
+        }
+
+
+        if(
+          id==="TDRC"||
+          id==="TYER"
+        ){
+
+          result.year=
+            decodeID3Text(frame);
+
+        }
+
+
+        if(id==="APIC"){
+
+          const art=
+            parseAPIC(frame);
+
+          if(art){
+            result.art=art;
+          }
+
+        }
+
+
+        pos=endFrame;
+
+      }
+
+    }
+
+  }catch(error){
+
+    console.warn(
+      "Metadata error",
+      error
+    );
+
+  }
+
+
+  return result;
+
+}
+
+
+function syncsafe(
+  a,b,c,d
+){
+
+  return(
+    ((a&127)<<21)|
+    ((b&127)<<14)|
+    ((c&127)<<7)|
+    (d&127)
+  );
+
+}
+
+
+function decodeID3Text(
+  bytes
+){
+
+  if(!bytes.length){
+    return "";
+  }
+
+
+  const encoding=
+    bytes[0];
+
+
+  let decoder;
+
+
+  if(encoding===1){
+
+    decoder=
+      new TextDecoder(
+        "utf-16"
+      );
+
+  }else if(encoding===2){
+
+    decoder=
+      new TextDecoder(
+        "utf-16be"
+      );
+
+  }else{
+
+    decoder=
+      new TextDecoder(
+        "utf-8"
+      );
+
+  }
+
+
+  return decoder
+    .decode(
+      bytes.slice(1)
+    )
+    .replace(/\0/g,"")
+    .trim();
+
+}
+
+
+function parseAPIC(
+  bytes
+){
+
+  try{
+
+    let pos=1;
+
+
+    const encoding=
+      bytes[0];
+
+
+    let mimeEnd=pos;
+
+
+    while(
+      mimeEnd<bytes.length &&
+      bytes[mimeEnd]!==0
+    ){
+
+      mimeEnd++;
+
+    }
+
+
+    const mime=
+      new TextDecoder()
+        .decode(
+          bytes.slice(
+            pos,
+            mimeEnd
+          )
+        );
+
+
+    pos=
+      mimeEnd+1;
+
+
+    pos+=1;
+
+
+    if(
+      encoding===0||
+      encoding===3
+    ){
+
+      while(
+        pos<bytes.length &&
+        bytes[pos]!==0
+      ){
+
+        pos++;
+
+      }
+
+      pos++;
+
+    }else{
+
+      while(
+        pos+1<bytes.length &&
+        !(
+          bytes[pos]===0&&
+          bytes[pos+1]===0
+        )
+      ){
+
+        pos+=2;
+
+      }
+
+      pos+=2;
+
+    }
+
+
+    const image=
+      bytes.slice(pos);
+
+
+    const blob=
+      new Blob(
+        [image],
+        {
+          type:
+            mime||
+            "image/jpeg"
+        }
+      );
+
+
+    return URL.createObjectURL(
+      blob
+    );
+
+  }catch{
+
+    return "";
+
+  }
+
+}
+
+
+/* ============================================================
+   CUSTOMIZATION
+============================================================ */
+
+function openCustomize(){
+
+  fillCustomize();
+
+  $("customModal")
+    .classList
+    .add("show");
+
+}
+
+
+function closeCustomize(){
+
+  $("customModal")
+    .classList
+    .remove("show");
+
+}
+
+
+function fillCustomize(){
+
+  if(!currentProfile){
+    return;
+  }
+
+
+  const p=
+    profiles[currentProfile];
+
+
+  $("customName").value=
+    p.name;
+
+
+  $("customGreeting").value=
+    p.greeting;
+
+
+  $("customEyebrow").value=
+    p.eyebrow;
+
+
+  $("customReminder").value=
+    p.reminder;
+
+
+  $("customAvatarPreview").src=
+    p.avatar;
+
+
+  $("colorPink").value=
+    p.colors.pink;
+
+
+  $("colorPurple").value=
+    p.colors.purple;
+
+
+  $("colorBlue").value=
+    p.colors.blue;
+
+}
+
+
+$("avatarUpload")
+  .addEventListener(
+    "change",
+    e=>{
+
+      const file=
+        e.target.files[0];
+
+
+      if(!file){
+        return;
+      }
+
+
+      const reader=
+        new FileReader();
+
+
+      reader.onload=()=>{
+
+        profiles[currentProfile]
+          .avatar=
+          reader.result;
+
+
+        $("customAvatarPreview")
+          .src=
+          reader.result;
+
+      };
+
+
+      reader.readAsDataURL(
+        file
+      );
+
+    }
+  );
+
+
+function saveCustomization(){
+
+  const p=
+    profiles[currentProfile];
+
+
+  p.name=
+    $("customName")
+      .value
+      .trim()||
+    "you";
+
+
+  p.greeting=
+    $("customGreeting")
+      .value
+      .trim()||
+    "hi ♡";
+
+
+  p.eyebrow=
+    $("customEyebrow")
+      .value
+      .trim()||
+    "ONLINE IN MY OWN LITTLE WORLD";
+
+
+  p.reminder=
+    $("customReminder")
+      .value
+      .trim()||
+    "make today cute.";
+
+
+  p.colors.pink=
+    $("colorPink")
+      .value;
+
+
+  p.colors.purple=
+    $("colorPurple")
+      .value;
+
+
+  p.colors.blue=
+    $("colorBlue")
+      .value;
+
+
+  saveProfiles();
+
+  applyProfile();
+
+  closeCustomize();
+
+  toast(
+    "Your world updated ♡"
+  );
+
+}
+
+
+async function changeDiaryPassword(){
+
+  const password=
+    $("newDiaryPassword")
+      .value;
+
+
+  if(
+    !validPassword(password)
+  ){
+
+    toast(
+      "Use at least 4 characters."
+    );
+
+    return;
+
+  }
+
+
+  profiles[currentProfile]
+    .diary
+    .passwordHash=
+      await hashPassword(
+        password
+      );
+
+
+  saveProfiles();
+
+
+  $("newDiaryPassword")
+    .value="";
+
+
+  toast(
+    "Diary password changed ♡"
+  );
+
+}
+
+
+/* ============================================================
+   DELETE PROFILE
+============================================================ */
+
+async function deleteCurrentProfile(){
+
+  const p=
+    profiles[currentProfile];
+
+
+  if(
+    !confirm(
+      `Delete ${p.name}'s entire world?\n\n`+
+      `Photos, music, diary, notes and friends on this browser will be removed.`
+    )
+  ){
+
+    return;
+
+  }
+
+
+  const photos=
+    await getMyPhotos();
+
+
+  for(
+    const photo of photos
+  ){
+
+    await dbDelete(
+      "photos",
+      photo.id
+    );
+
+  }
+
+
+  const allTracks=
+    await dbGetAll(
+      "tracks"
+    );
+
+
+  for(
+    const track of allTracks
+  ){
+
+    if(
+      track.profileId===
+      currentProfile
+    ){
+
+      await dbDelete(
+        "tracks",
+        track.id
+      );
+
+    }
+
+  }
+
+
+  Object.values(
+    profiles
+  )
+  .forEach(
+    other=>{
+
+      if(other.friends){
+
+        other.friends=
+          other.friends.filter(
+            id=>
+              id!==currentProfile
+          );
+
+      }
+
+    }
+  );
+
+
+  delete profiles[
+    currentProfile
+  ];
+
+
+  saveProfiles();
+
+  forgetDevice();
+
+  logoutProfile();
+
+  toast(
+    "Profile deleted."
+  );
+
+}
+
+
+/* ============================================================
+   GOOGLE LOGIN
+============================================================ */
+
+/*
+  A REAL Google login cannot be securely implemented
+  in a standalone HTML file.
+
+  This button is ready as the UI entry point.
+
+  To make it actually work, the website needs:
+  
+  1. Google OAuth credentials
+  2. A hosted website
+  3. An authentication/backend service
+
+  Firebase Authentication or Supabase Auth are good
+  choices for this.
+
+  Once connected, Google can automatically create/login
+  the profile and the remembered-device behavior can
+  happen through the auth provider.
+*/
+
+function googleLogin(){
+
+  toast(
+    "Google login needs the online auth version ♡"
+  );
+
+  /*
+    When you connect Firebase/Supabase, replace this
+    function with the provider login call.
+  */
+
+}
+
+
+/* ============================================================
+   SPARKLES
+============================================================ */
+
+function sparkleBurst(){
+
+  const symbols=[
+    "✦",
+    "✧",
+    "♡",
+    "★",
+    "✿",
+    "⋆"
+  ];
+
+
+  for(
+    let i=0;
+    i<18;
+    i++
+  ){
+
+    const el=
+      document.createElement(
+        "div"
+      );
+
+
+    el.textContent=
+      symbols[
+        Math.floor(
+          Math.random()*
+          symbols.length
+        )
+      ];
+
+
+    el.style.position=
+      "fixed";
+
+    el.style.left=
+      "50%";
+
+    el.style.top=
+      "45%";
+
+    el.style.zIndex=
+      "10000";
+
+    el.style.pointerEvents=
+      "none";
+
+    el.style.fontSize=
+      (
+        12+
+        Math.random()*20
+      )+"px";
+
+
+    el.style.color=
+      [
+        "#fff",
+        "#ff63b5",
+        "#9a7cff",
+        "#66dfe6"
+      ][
+        Math.floor(
+          Math.random()*4
+        )
+      ];
+
+
+    document.body.appendChild(
+      el
+    );
+
+
+    const angle=
+      Math.random()*
+      Math.PI*2;
+
+
+    const distance=
+      80+
+      Math.random()*220;
+
+
+    const x=
+      Math.cos(angle)*
+      distance;
+
+
+    const y=
+      Math.sin(angle)*
+      distance;
+
+
+    el.animate(
+      [
+        {
+          transform:
+            "translate(-50%,-50%) scale(.4)",
+          opacity:1
+        },
+        {
+          transform:
+            `translate(
+              calc(-50% + ${x}px),
+              calc(-50% + ${y}px)
+            )
+            scale(1.4)`,
+          opacity:0
+        }
+      ],
+      {
+        duration:
+          900+
+          Math.random()*600,
+
+        easing:
+          "cubic-bezier(.2,.7,.2,1)"
+      }
+    ).onfinish=()=>{
+      el.remove();
+    };
+
+  }
+
+}
+
+
+/* ============================================================
+   START
+============================================================ */
+
+(async function(){
+
+  try{
+
+    await openDB();
+
+    loadProfiles();
+
+
+    /*
+      THIS IS THE IMPORTANT PART:
+
+      If the user has previously signed in and
+      the device key still exists, skip auth entirely.
+    */
+
+    const loggedIn=
+      await autoLogin();
+
+
+    if(!loggedIn){
+
+      $("authScreen")
+        .style
+        .display="flex";
+
+      $("app")
+        .style
+        .display="none";
+
+      showSignup();
+
+    }
+
+  }catch(error){
+
+    console.error(error);
+
+    $("authScreen")
+      .style
+      .display="flex";
+
+  }
+
+})();
+
+
+
+/* ============================================================
+   RESTORED CHATS
+============================================================ */
+
+let activeChatFriend=null;
+
+function ensureChatStorage(){
+  if(currentProfile && !profiles[currentProfile].chats){
+    profiles[currentProfile].chats={};
+  }
+}
+
+function chatKey(friendId){
+  return [currentProfile,friendId].sort().join("__");
+}
+
+function renderChats(){
+  if(!currentProfile || !$('chatList')) return;
+  ensureChatStorage();
+  const p=profiles[currentProfile];
+  const ids=(p.friends||[]).filter(id=>profiles[id]);
+  $('chatCount').textContent=`${ids.length} chat${ids.length===1?'':'s'}`;
+  const list=$('chatList');
+  if(!ids.length){
+    list.innerHTML=`<div style="text-align:center;padding:25px 10px;color:#80638e;font-size:11px">No friends yet ♡<br>Add someone in FRIENDS first.</div>`;
+    activeChatFriend=null;
+    renderChatWindow();
+    return;
+  }
+  if(!activeChatFriend || !ids.includes(activeChatFriend)) activeChatFriend=ids[0];
+  list.innerHTML='';
+  ids.forEach(id=>{
+    const friend=profiles[id];
+    const button=document.createElement('button');
+    button.className='chat-person'+(activeChatFriend===id?' active':'');
+    const messages=p.chats[chatKey(id)]||[];
+    const last=messages[messages.length-1];
+    button.innerHTML=`<img src="${friend.avatar||defaultImage()}" alt=""><div class="chat-person-info"><strong>${escapeHTML(friend.name)}</strong><span>${last?escapeHTML(last.text):'say hi ♡'}</span></div>`;
+    button.onclick=()=>{activeChatFriend=id;renderChats();};
+    list.appendChild(button);
+  });
+  renderChatWindow();
+}
+
+function renderChatWindow(){
+  if(!$('chatMessages')) return;
+  const friend=activeChatFriend?profiles[activeChatFriend]:null;
+  if(!friend){
+    $('chatName').textContent='choose a friend';
+    $('chatStatus').textContent='your little messages ♡';
+    $('chatAvatar').src=defaultImage();
+    $('chatMessages').innerHTML='<div class="chat-empty">Pick someone from your friends list<br>to start chatting ♡</div>';
+    return;
+  }
+  $('chatName').textContent=friend.name;
+  $('chatStatus').innerHTML='<span class="online-dot"></span> friend';
+  $('chatAvatar').src=friend.avatar||defaultImage();
+  ensureChatStorage();
+  const messages=profiles[currentProfile].chats[chatKey(activeChatFriend)]||[];
+  const box=$('chatMessages');
+  if(!messages.length){
+    box.innerHTML=`<div class="chat-empty">♡<br><br>No messages yet.<br>Say something to ${escapeHTML(friend.name)}!</div>`;
+    return;
+  }
+  box.innerHTML='';
+  messages.forEach(m=>{
+    const bubble=document.createElement('div');
+    bubble.className='message '+(m.sender==='me'?'me':'them');
+    const time=new Date(m.time).toLocaleTimeString(undefined,{hour:'2-digit',minute:'2-digit'});
+    bubble.innerHTML=escapeHTML(m.text)+`<span class="message-time">${time}</span>`;
+    box.appendChild(bubble);
+  });
+  box.scrollTop=box.scrollHeight;
+}
+
+function sendChat(){
+  if(!currentProfile || !activeChatFriend){toast('Choose a friend first ♡');return;}
+  const input=$('chatInput');
+  const text=input.value.trim();
+  if(!text) return;
+  ensureChatStorage();
+  const key=chatKey(activeChatFriend);
+  if(!profiles[currentProfile].chats[key]) profiles[currentProfile].chats[key]=[];
+  profiles[currentProfile].chats[key].push({sender:'me',text,time:Date.now()});
+  saveProfiles();
+  input.value='';
+  renderChats();
+}
+
+/* ============================================================
+   CAMERA PHONE FALLBACK
+============================================================ */
+
+async function importCameraPhoto(event){
+  const file=event.target.files&&event.target.files[0];
+  if(!file) return;
+  if(!file.type.startsWith('image/')){toast('Please choose an image ♡');return;}
+  try{
+    await dbAdd('photos',{profileId:currentProfile,created:Date.now(),blob:file});
+    await renderPhotos();
+    toast('Photo saved to your camera roll ♡');
+  }catch(error){
+    console.error(error);
+    toast('Could not save that photo.');
+  }
+  event.target.value='';
+}
+
+/* ============================================================
+   CAMERA RELIABILITY PATCH
+============================================================ */
+
+const originalStartCamera=startCamera;
+startCamera=async function(){
+  try{
+    await originalStartCamera();
+    const video=$('cameraVideo');
+    if(cameraStream && video){
+      video.setAttribute('playsinline','');
+      video.muted=true;
+      try{await video.play();}catch(e){}
+      $('cameraPlaceholder')?.classList.add('hidden');
+    }
+  }catch(error){
+    console.error(error);
+  }
+};
+
+/* ============================================================
+   NAVIGATION PATCH FOR CHATS
+============================================================ */
+
+const originalShowPageForChats=showPage;
+showPage=function(name,button){
+  originalShowPageForChats(name,button);
+  if(name==='chats') renderChats();
+};
+
+/* Keep chat list synchronized after friend changes. */
+const originalRenderFriendsForChats=renderFriends;
+renderFriends=function(){
+  originalRenderFriendsForChats();
+  if(currentProfile && $('chatList')) renderChats();
+};
+
+/* Make the existing profile entry point refresh chats too. */
+const originalEnterProfileForChats=enterProfile;
+enterProfile=async function(id){
+  await originalEnterProfileForChats(id);
+  activeChatFriend=null;
+  renderChats();
+};
+
 </script>
-</body></html>
+
+</body>
+</html>
